@@ -1,0 +1,79 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.personalDetail {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fullName,
+.emailPhone {
+  display: flex;
+  gap: 30px;
+}
+
+.nameImg {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.imageUploadContainer {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.imagePreview {
+  width: 150px;
+  height: 150px;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+}
+
+.imagePreview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.placeholder {
+  color: #888;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+}
+
+.inputEntry {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  width: 100%;
+}
+
+.inputEntry label {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.inputEntry input {
+  font-size: 1rem;
+  padding: 10px;
+  height: 40px;
+  background-color: gainsboro;
+  color: black;
+  border: none;
+}
+
+.inputEntry input:focus {
+  background-color: rgb(226, 226, 255);
+}

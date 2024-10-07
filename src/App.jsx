@@ -1,35 +1,50 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import ResumePreview from "./components/ResumePreview";
 import ResumeForm from "./components/ResumeForm";
 
 function App() {
-  const [fullName, setFullName] = useState({ firstName: "", lastName: "" });
-  const [headline, setHeadline] = useState("");
+  const [personalDetails, setPersonalDetails] = useState({
+    firstName: "",
+    lastName: "",
+    headline: "",
+    email: "",
+    phone: "",
+    address: "",
+    postcode: "",
+    city: "",
+  });
 
-  function handleNameChange(e) {
-    const { name, value } = e.target; // Destructure the name and value from the event target
-    setFullName((prevFullName) => ({
-      ...prevFullName,
-      [name]: value, // Use computed property name to update the appropriate field
+  const [image, setImage] = useState(null);
+
+  function handlePersonalDetailChange(e) {
+    const { name, value } = e.target;
+    setPersonalDetails((prevPersonalDetails) => ({
+      ...prevPersonalDetails,
+      [name]: value,
     }));
   }
 
-  function handleHeadlineChange(e) {
-    setHeadline(e.target.value);
-  }
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <>
       <ResumeForm
-        fullName={fullName}
-        headline={headline}
-        handleNameChange={handleNameChange}
-        handleHeadlineChange={handleHeadlineChange}
+        personalDetails={personalDetails}
+        image={image}
+        handlePersonalDetailChange={handlePersonalDetailChange}
+        handleImageUpload={handleImageUpload}
       />
-      <ResumePreview fullName={fullName} headline={headline} />
+      <ResumePreview personalDetails={personalDetails} image={image} />
     </>
   );
 }

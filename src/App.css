@@ -1,10 +1,28 @@
+html {
+  font-size: 14px;
+}
+
 #root {
   width: 100vw;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   display: flex;
-  justify-content: center;
-  gap: 100px;
+  justify-content: space-evenly;
   background-color: lightblue;
+}
+
+body.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Example of other styles */
+.light-mode header {
+  background-color: #f0f0f0;
+}
+
+.light-mode button {
+  background-color: #e0e0e0;
+  color: #000;
 }
