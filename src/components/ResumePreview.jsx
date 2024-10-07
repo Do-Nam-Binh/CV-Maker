@@ -25,6 +25,7 @@ function ResumePreview({ personalDetails, image }) {
                     width: "150px",
                     height: "150px",
                     objectFit: "cover",
+                    marginTop: "30px",
                   }}
                 />
               )}
