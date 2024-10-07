@@ -4,6 +4,15 @@ import emailLogo from "../assets/envelope.svg";
 import phoneLogo from "../assets/phone-flip.svg";
 
 function ResumePreview({ personalDetails, image }) {
+  const showPersonalHeader =
+    personalDetails.email ||
+    personalDetails.phone ||
+    personalDetails.address ||
+    personalDetails.postcode ||
+    personalDetails.city
+      ? true
+      : false;
+
   return (
     <>
       <div className={styles.body}>
@@ -33,25 +42,37 @@ function ResumePreview({ personalDetails, image }) {
           </div>
 
           <div className={styles.leftHeaders}>
-            <div className={styles.leftHeadersLabel}>Personal Details</div>
-            <div className={styles.info}>
-              <img src={emailLogo} className={styles.logo} alt="Email logo" />
-              <div>{personalDetails.email}</div>
-            </div>
-            <div className={styles.info}>
-              <img src={phoneLogo} className={styles.logo} alt="Phone logo" />
-              <div>{personalDetails.phone}</div>
-            </div>
-            <div className={styles.info}>
-              <img src={houseLogo} className={styles.logo} alt="House logo" />
-              <div>
-                <div>{personalDetails.address}</div>
-                <div className={styles.postcodeCity}>
-                  <div>{personalDetails.postcode}</div>
-                  <div>{personalDetails.city}</div>
+            {showPersonalHeader && (
+              <div className={styles.leftHeadersLabel}>Personal Details</div>
+            )}
+            {personalDetails.email && (
+              <div className={styles.info}>
+                <img src={emailLogo} className={styles.logo} alt="Email logo" />
+                <div>{personalDetails.email}</div>
+              </div>
+            )}
+
+            {personalDetails.phone && (
+              <div className={styles.info}>
+                <img src={phoneLogo} className={styles.logo} alt="Phone logo" />
+                <div>{personalDetails.phone}</div>
+              </div>
+            )}
+
+            {(personalDetails.address ||
+              personalDetails.postcode ||
+              personalDetails.city) && (
+              <div className={styles.info}>
+                <img src={houseLogo} className={styles.logo} alt="House logo" />
+                <div>
+                  <div>{personalDetails.address}</div>
+                  <div className={styles.postcodeCity}>
+                    <div>{personalDetails.postcode}</div>
+                    <div>{personalDetails.city}</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
           <div className={styles.leftHeaders}>
             <div className={styles.leftHeadersLabel}>Skills</div>
