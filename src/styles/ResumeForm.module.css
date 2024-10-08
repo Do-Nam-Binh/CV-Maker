@@ -69,11 +69,60 @@
   font-size: 1rem;
   padding: 10px;
   height: 40px;
-  background-color: gainsboro;
+  background-color: rgb(230, 230, 230);
   color: black;
   border: none;
+  border-radius: 5px;
 }
 
 .inputEntry input:focus {
   background-color: rgb(226, 226, 255);
+}
+
+.eduForm {
+  margin: 30px 0px;
+  padding: 20px;
+  border: 1px solid rgb(90, 90, 90);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.schoolCity,
+.dateSelector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.startDateSelector,
+.endDateSelector {
+  display: flex;
+  gap: 10px;
+}
+
+.inputEntry select,
+.inputEntry textarea {
+  font-size: 1rem;
+  background-color: rgb(230, 230, 230);
+  color: #000;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.submitEduInfo {
+  align-self: flex-end;
+  padding: 10px 20px;
+  font: 1.25rem;
+  color: #000;
+  background-color: rgb(144, 214, 238);
+  border: none;
+  border-radius: 40px;
+}
+
+.submitEduInfo:hover {
+  background-color: rgb(177, 224, 240);
 }

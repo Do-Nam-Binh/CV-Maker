@@ -89,8 +89,6 @@ function ResumePreview({ personalDetails, image }) {
         <div className={styles.rightSide}>
           <div className={styles.rightHeaders}>Education</div>
           <div className={styles.rightHeaders}>Employment</div>
-          <div className={styles.rightHeaders}>Skills</div>
-          <div className={styles.rightHeaders}>Languages</div>
           <div className={styles.rightHeaders}>Projects</div>
         </div>
       </div>

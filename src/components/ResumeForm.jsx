@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Dropdown from "./Dropdown";
 import styles from "../styles/ResumeForm.module.css";
+import Dropdown from "./Dropdown";
+import EducationInput from "./EducationInput";
 
 function ResumeForm({
   personalDetails,
@@ -148,7 +149,7 @@ function ResumeForm({
         isOpen={openIndex === 1}
         toggle={() => handleToggle(1)}
       >
-        <p>Content for Education</p>
+        <EducationInput />
       </Dropdown>
 
       <Dropdown
