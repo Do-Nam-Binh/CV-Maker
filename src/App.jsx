@@ -36,7 +36,10 @@ function App() {
         };
   });
 
-  const [educationList, setEducationList] = useState([]);
+  const [educationList, setEducationList] = useState(() => {
+    const savedEduList = localStorage.getItem("eduList");
+    return savedEduList ? JSON.parse(savedEduList) : [];
+  });
 
   const [image, setImage] = useState(
     localStorage.profileImg ? localStorage.profileImg : null
@@ -49,6 +52,10 @@ function App() {
   useEffect(() => {
     localStorage.profileImg = image;
   }, [image]);
+
+  useEffect(() => {
+    localStorage.setItem("eduList", JSON.stringify(educationList));
+  }, [educationList]);
 
   function handlePersonalDetailChange(e) {
     const { name, value } = e.target;
