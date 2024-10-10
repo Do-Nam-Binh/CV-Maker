@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/ResumeForm.module.css";
 
 function EducationInput() {
-  const [educationInfo, setEducationInfo] = useState({
-    eduName: "",
-    school: "",
-    city: "",
-    startMonth: "",
-    startYear: "",
-    endMonth: "",
-    endYear: "",
-    desc: "",
+  const [educationInfo, setEducationInfo] = useState(() => {
+    const savedEduInfo = localStorage.getItem("eduInfo");
+    return savedEduInfo
+      ? JSON.parse(savedEduInfo)
+      : {
+          eduName: "",
+          school: "",
+          city: "",
+          startMonth: "",
+          startYear: "",
+          endMonth: "",
+          endYear: "",
+          desc: "",
+        };
   });
 
   function handleEduInfoChange(e) {
@@ -20,6 +25,10 @@ function EducationInput() {
       [name]: value,
     }));
   }
+
+  useEffect(() => {
+    localStorage.setItem("eduInfo", JSON.stringify(educationInfo));
+  }, [educationInfo]);
 
   const months = {
     0: "Month",
@@ -52,6 +61,7 @@ function EducationInput() {
           name="eduName"
           id={styles.eduNameInput}
           onChange={handleEduInfoChange}
+          value={educationInfo.eduName}
         />
       </div>
 
@@ -63,6 +73,7 @@ function EducationInput() {
             name="school"
             id={styles.schoolInput}
             onChange={handleEduInfoChange}
+            value={educationInfo.school}
           />
         </div>
         <div className={styles.inputEntry}>
@@ -72,6 +83,7 @@ function EducationInput() {
             name="city"
             id={styles.cityInput}
             onChange={handleEduInfoChange}
+            value={educationInfo.city}
           />
         </div>
       </div>
@@ -85,6 +97,7 @@ function EducationInput() {
                 name="startMonth"
                 id="monthSelect"
                 onChange={handleEduInfoChange}
+                value={educationInfo.startMonth}
               >
                 {Object.entries(months).map(([key, value]) => (
                   <option key={key} value={key}>
@@ -97,6 +110,7 @@ function EducationInput() {
                 name="startYear"
                 id="yearSelect"
                 onChange={handleEduInfoChange}
+                value={educationInfo.startYear}
               >
                 <option key="Year" value={null}>
                   Year
@@ -117,6 +131,7 @@ function EducationInput() {
                 name="endMonth"
                 id="monthSelect"
                 onChange={handleEduInfoChange}
+                value={educationInfo.endMonth}
               >
                 {Object.entries(months).map(([key, value]) => (
                   <option key={key} value={key}>
@@ -129,6 +144,7 @@ function EducationInput() {
                 name="endYear"
                 id="yearSelect"
                 onChange={handleEduInfoChange}
+                value={educationInfo.endYear}
               >
                 <option key="Year" value={null}>
                   Year
@@ -151,6 +167,7 @@ function EducationInput() {
           id={styles.descInput}
           rows="10"
           onChange={handleEduInfoChange}
+          value={educationInfo.desc}
         ></textarea>
       </div>
 
