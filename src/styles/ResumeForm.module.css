@@ -126,3 +126,28 @@
 .submitEduInfo:hover {
   background-color: rgb(177, 224, 240);
 }
+
+.formEduList {
+  margin-top: 30px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.eduEntry {
+  width: 100%;
+  padding: 20px 0px;
+  background-color: white;
+  color: #000;
+  border: 1px solid black;
+  text-align: start;
+}
+
+.eduEntry div {
+  margin: 0px 30px;
+}
+
+.eduEntry {
+  font-weight: bold;
+}

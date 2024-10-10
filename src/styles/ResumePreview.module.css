@@ -53,6 +53,9 @@
 .rightSide {
   background-color: white;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .rightSide div {
@@ -62,12 +65,11 @@
 .rightHeaders {
   font-size: 1.75rem;
   font-weight: bold;
-  margin-bottom: 20px;
 }
 
 .rightHeadersLabel {
-  margin-bottom: 10px;
   border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 
 .info {

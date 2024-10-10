@@ -90,6 +90,7 @@ function App() {
         handlePersonalDetailChange={handlePersonalDetailChange}
         handleImageUpload={handleImageUpload}
         educationInfo={educationInfo}
+        educationList={educationList}
         handleEduInfoChange={handleEduInfoChange}
         handleAddEdu={handleAddEdu}
       />

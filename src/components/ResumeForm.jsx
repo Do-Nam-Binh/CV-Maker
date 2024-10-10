@@ -8,8 +8,9 @@ function ResumeForm({
   handlePersonalDetailChange,
   handleImageUpload,
   image,
-  handleAddEdu,
   educationInfo,
+  educationList,
+  handleAddEdu,
   handleEduInfoChange,
 }) {
   const [openIndex, setOpenIndex] = useState(null); // State to track which section is open
@@ -152,6 +153,20 @@ function ResumeForm({
         isOpen={openIndex === 1}
         toggle={() => handleToggle(1)}
       >
+        {educationList.length > 0 && (
+          <ul className={styles.formEduList}>
+            {educationList.map((item) => (
+              <li key={item.id}>
+                <button className={styles.eduEntry}>
+                  <div>{item.eduName}</div>
+                  <div>
+                    {item.school}, {item.city}
+                  </div>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
         <EducationInput
           educationInfo={educationInfo}
           handleEduInfoChange={handleEduInfoChange}
