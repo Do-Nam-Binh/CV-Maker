@@ -20,6 +20,22 @@ function App() {
         };
   });
 
+  const [educationInfo, setEducationInfo] = useState(() => {
+    const savedEduInfo = localStorage.getItem("eduInfo");
+    return savedEduInfo
+      ? JSON.parse(savedEduInfo)
+      : {
+          eduName: "",
+          school: "",
+          city: "",
+          startMonth: "",
+          startYear: "",
+          endMonth: "",
+          endYear: "",
+          desc: "",
+        };
+  });
+
   const [educationList, setEducationList] = useState([]);
 
   const [image, setImage] = useState(
@@ -53,6 +69,19 @@ function App() {
     }
   };
 
+  function handleEduInfoChange(e) {
+    const { name, value } = e.target;
+    setEducationInfo((prevEduInfo) => ({
+      ...prevEduInfo,
+      [name]: value,
+    }));
+  }
+
+  const handleAddEdu = () => {
+    const newEduItem = { ...educationInfo, id: crypto.randomUUID() };
+    setEducationList([...educationList, newEduItem]);
+  };
+
   return (
     <>
       <ResumeForm
@@ -60,8 +89,15 @@ function App() {
         image={image}
         handlePersonalDetailChange={handlePersonalDetailChange}
         handleImageUpload={handleImageUpload}
+        educationInfo={educationInfo}
+        handleEduInfoChange={handleEduInfoChange}
+        handleAddEdu={handleAddEdu}
       />
-      <ResumePreview personalDetails={personalDetails} image={image} />
+      <ResumePreview
+        personalDetails={personalDetails}
+        image={image}
+        educationList={educationList}
+      />
     </>
   );
 }

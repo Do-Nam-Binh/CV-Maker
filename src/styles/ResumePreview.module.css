@@ -47,6 +47,7 @@
   border-bottom: 1px solid #ccc;
   margin-bottom: 15px;
   font-weight: bold;
+  text-align: start;
 }
 
 .rightSide {
@@ -54,10 +55,19 @@
   padding: 20px;
 }
 
+.rightSide div {
+  text-align: start;
+}
+
 .rightHeaders {
   font-size: 1.75rem;
   font-weight: bold;
   margin-bottom: 20px;
+}
+
+.rightHeadersLabel {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
 .info {
@@ -79,4 +89,22 @@
 .logo {
   width: 25px;
   height: 25px;
+}
+
+.eduListItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style-type: none;
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+
+.eduListItem .eduName {
+  font-weight: bold;
+}
+
+.eduNameDate {
+  display: flex;
+  justify-content: space-between;
 }

@@ -8,6 +8,9 @@ function ResumeForm({
   handlePersonalDetailChange,
   handleImageUpload,
   image,
+  handleAddEdu,
+  educationInfo,
+  handleEduInfoChange,
 }) {
   const [openIndex, setOpenIndex] = useState(null); // State to track which section is open
 
@@ -149,7 +152,11 @@ function ResumeForm({
         isOpen={openIndex === 1}
         toggle={() => handleToggle(1)}
       >
-        <EducationInput />
+        <EducationInput
+          educationInfo={educationInfo}
+          handleEduInfoChange={handleEduInfoChange}
+          handleAddEdu={handleAddEdu}
+        />
       </Dropdown>
 
       <Dropdown

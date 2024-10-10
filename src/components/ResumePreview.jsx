@@ -3,7 +3,7 @@ import houseLogo from "../assets/house-chimney.svg";
 import emailLogo from "../assets/envelope.svg";
 import phoneLogo from "../assets/phone-flip.svg";
 
-function ResumePreview({ personalDetails, image }) {
+function ResumePreview({ personalDetails, image, educationList }) {
   const showPersonalHeader =
     personalDetails.email ||
     personalDetails.phone ||
@@ -12,6 +12,21 @@ function ResumePreview({ personalDetails, image }) {
     personalDetails.city
       ? true
       : false;
+
+  const monthNumberToLabelMap = {
+    [1]: "January",
+    [2]: "February",
+    [3]: "March",
+    [4]: "April",
+    [5]: "May",
+    [6]: "June",
+    [7]: "July",
+    [8]: "August",
+    [9]: "September",
+    [10]: "October",
+    [11]: "November",
+    [12]: "December",
+  };
 
   return (
     <>
@@ -87,9 +102,37 @@ function ResumePreview({ personalDetails, image }) {
         </div>
 
         <div className={styles.rightSide}>
-          <div className={styles.rightHeaders}>Education</div>
-          <div className={styles.rightHeaders}>Employment</div>
-          <div className={styles.rightHeaders}>Projects</div>
+          <div className={styles.rightHeaders}>
+            <div className={styles.rightHeadersLabel}>Education</div>
+            <div className={styles.eduList}>
+              <ul className={styles.eduListItem}>
+                {educationList.map((item) => (
+                  <li key={item.id}>
+                    <div className={styles.eduNameDate}>
+                      <div className={styles.eduName}>{item.eduName}</div>
+                      <div className={styles.date}>
+                        {monthNumberToLabelMap[item.startMonth]}{" "}
+                        {item.startYear} -{" "}
+                        {monthNumberToLabelMap[item.endMonth]} {item.endYear}
+                      </div>
+                    </div>
+
+                    <div className={styles.schoolCity}>
+                      {item.school}, {item.city}
+                    </div>
+
+                    <div className={styles.desc}>{item.desc}</div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className={styles.rightHeaders}>
+            <div className={styles.rightHeadersLabel}>Employment</div>
+          </div>
+          <div className={styles.rightHeaders}>
+            <div className={styles.rightHeadersLabel}>Projects</div>
+          </div>
         </div>
       </div>
     </>

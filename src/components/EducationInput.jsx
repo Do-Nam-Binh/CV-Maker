@@ -1,31 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/ResumeForm.module.css";
 
-function EducationInput() {
-  const [educationInfo, setEducationInfo] = useState(() => {
-    const savedEduInfo = localStorage.getItem("eduInfo");
-    return savedEduInfo
-      ? JSON.parse(savedEduInfo)
-      : {
-          eduName: "",
-          school: "",
-          city: "",
-          startMonth: "",
-          startYear: "",
-          endMonth: "",
-          endYear: "",
-          desc: "",
-        };
-  });
-
-  function handleEduInfoChange(e) {
-    const { name, value } = e.target;
-    setEducationInfo((prevEduInfo) => ({
-      ...prevEduInfo,
-      [name]: value,
-    }));
-  }
-
+function EducationInput({ educationInfo, handleEduInfoChange, handleAddEdu }) {
   useEffect(() => {
     localStorage.setItem("eduInfo", JSON.stringify(educationInfo));
   }, [educationInfo]);
@@ -171,7 +147,9 @@ function EducationInput() {
         ></textarea>
       </div>
 
-      <button className={styles.submitEduInfo}>Done</button>
+      <button className={styles.submitEduInfo} onClick={handleAddEdu}>
+        Done
+      </button>
     </div>
   );
 }
