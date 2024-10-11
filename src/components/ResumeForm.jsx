@@ -11,7 +11,7 @@ function ResumeForm({
   educationList,
   handleAddOrEdit,
   handleInfoChange,
-  handleEditEdu,
+  handleEdit,
   editingId,
   setEditingId,
 }) {
@@ -23,8 +23,8 @@ function ResumeForm({
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const handleEdit = (id) => {
-    handleEditEdu(id);
+  const handleEditSubmit = (id, type) => {
+    handleEdit(id, type);
     setDisplayForm(false);
   };
 
@@ -175,7 +175,7 @@ function ResumeForm({
                 ) : (
                   <button
                     className={styles.eduEntry}
-                    onClick={() => handleEdit(item.id)} // Open form for the clicked entry
+                    onClick={() => handleEditSubmit(item.id, "education")} // Open form for the clicked entry
                   >
                     {item.eduName != "" ? (
                       <div>{item.eduName}</div>

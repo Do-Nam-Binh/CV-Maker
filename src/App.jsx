@@ -141,25 +141,19 @@ function App() {
         });
         break;
       case "employment":
+        setEmploymentInfo({
+          position: "",
+          employer: "",
+          city: "",
+          startMonth: "",
+          startYear: "",
+          endMonth: "",
+          endYear: "",
+          desc: "",
+        });
         break;
     }
   };
-
-  // const handleAddEdu = (type) => {
-  //   if (editingId !== null) {
-  //     // Update existing education entry by id
-  //     const updatedList = educationList.map((item) =>
-  //       item.id === editingId ? { ...educationInfo, id: item.id } : item
-  //     );
-  //     setEducationList(updatedList);
-  //     setEditingId(null); // Reset editingId after updating
-  //   } else {
-  //     // Add new education entry
-  //     const newEduItem = { ...educationInfo, id: crypto.randomUUID() };
-  //     setEducationList([...educationList, newEduItem]);
-  //   }
-  //   clearEduInfo(type);
-  // };
 
   const handleAddOrEdit = (type) => {
     switch (type) {
@@ -200,10 +194,23 @@ function App() {
     setEditingId(null); // Reset editing id after add/edit
   };
 
-  const handleEditEdu = (id) => {
-    const eduToEdit = educationList.find((item) => item.id === id);
-    setEducationInfo(eduToEdit);
-    setEditingId(id); // Set the id of the item being edited
+  const handleEdit = (id, type) => {
+    switch (type) {
+      case "education":
+        const eduToEdit = educationList.find((item) => item.id === id);
+        if (eduToEdit) setEducationInfo(eduToEdit);
+        break;
+
+      case "employment":
+        const employToEdit = employmentList.find((item) => item.id === id);
+        if (employToEdit) setEmploymentInfo(employToEdit);
+        break;
+
+      default:
+        console.warn("Invalid type passed to handleEdit");
+        break;
+    }
+    setEditingId(id); // Track the entry being edited
   };
 
   return (
@@ -216,7 +223,7 @@ function App() {
         educationInfo={educationInfo}
         educationList={educationList}
         handleAddOrEdit={handleAddOrEdit}
-        handleEditEdu={handleEditEdu}
+        handleEdit={handleEdit}
         editingId={editingId}
         setEditingId={setEditingId}
       />
