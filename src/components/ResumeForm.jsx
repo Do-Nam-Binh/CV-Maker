@@ -12,12 +12,20 @@ function ResumeForm({
   educationList,
   handleAddEdu,
   handleEduInfoChange,
+  handleEditEdu,
+  editingId,
 }) {
   const [openIndex, setOpenIndex] = useState(null); // State to track which section is open
+  const [displayForm, setDisplayForm] = useState(true);
 
   const handleToggle = (index) => {
     // If the clicked section is already open, close it. Otherwise, open the clicked section.
     setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const handleEdit = (id) => {
+    handleEditEdu(id);
+    setDisplayForm(false);
   };
 
   return (
@@ -157,21 +165,35 @@ function ResumeForm({
           <ul className={styles.formEduList}>
             {educationList.map((item) => (
               <li key={item.id}>
-                <button className={styles.eduEntry}>
-                  <div>{item.eduName}</div>
-                  <div>
-                    {item.school}, {item.city}
-                  </div>
-                </button>
+                {editingId === item.id ? (
+                  <EducationInput
+                    educationInfo={educationInfo}
+                    handleEduInfoChange={handleEduInfoChange}
+                    handleAddEdu={handleAddEdu}
+                    setDisplayForm={setDisplayForm}
+                  />
+                ) : (
+                  <button
+                    className={styles.eduEntry}
+                    onClick={() => handleEdit(item.id)} // Open form for the clicked entry
+                  >
+                    <div>{item.eduName}</div>
+                    <div>
+                      {item.school}, {item.city}
+                    </div>
+                  </button>
+                )}
               </li>
             ))}
           </ul>
         )}
-        <EducationInput
-          educationInfo={educationInfo}
-          handleEduInfoChange={handleEduInfoChange}
-          handleAddEdu={handleAddEdu}
-        />
+        {displayForm && (
+          <EducationInput
+            educationInfo={educationInfo}
+            handleEduInfoChange={handleEduInfoChange}
+            handleAddEdu={handleAddEdu}
+          />
+        )}
       </Dropdown>
 
       <Dropdown

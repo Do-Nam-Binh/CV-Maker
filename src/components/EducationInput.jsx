@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/ResumeForm.module.css";
 
-function EducationInput({ educationInfo, handleEduInfoChange, handleAddEdu }) {
+function EducationInput({
+  educationInfo,
+  handleEduInfoChange,
+  handleAddEdu,
+  setDisplayForm,
+}) {
   useEffect(() => {
     localStorage.setItem("eduInfo", JSON.stringify(educationInfo));
   }, [educationInfo]);
@@ -27,6 +32,11 @@ function EducationInput({ educationInfo, handleEduInfoChange, handleAddEdu }) {
   for (let year = startYear; year <= endYear; year++) {
     years.push(year);
   }
+
+  const handleSubmit = (e) => {
+    handleAddEdu(e);
+    setDisplayForm(true);
+  };
 
   return (
     <div className={styles.eduForm}>
@@ -147,7 +157,7 @@ function EducationInput({ educationInfo, handleEduInfoChange, handleAddEdu }) {
         ></textarea>
       </div>
 
-      <button className={styles.submitEduInfo} onClick={handleAddEdu}>
+      <button className={styles.submitEduInfo} onClick={handleSubmit}>
         Done
       </button>
     </div>

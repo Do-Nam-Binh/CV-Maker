@@ -44,7 +44,7 @@ function ResumePreview({ personalDetails, image, educationList }) {
               {image && (
                 <img
                   src={image}
-                  alt="Uploaded preview"
+                  alt=""
                   style={{
                     width: "150px",
                     height: "150px",

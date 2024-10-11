@@ -9,6 +9,7 @@ function App() {
     return savedPersonalInfo
       ? JSON.parse(savedPersonalInfo)
       : {
+          id: null,
           firstName: "",
           lastName: "",
           headline: "",
@@ -44,6 +45,8 @@ function App() {
   const [image, setImage] = useState(
     localStorage.profileImg ? localStorage.profileImg : null
   );
+
+  const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("personalDetails", JSON.stringify(personalDetails));
@@ -84,9 +87,39 @@ function App() {
     }));
   }
 
+  const clearEduInfo = () => {
+    setEducationInfo({
+      eduName: "",
+      school: "",
+      city: "",
+      startMonth: "",
+      startYear: "",
+      endMonth: "",
+      endYear: "",
+      desc: "",
+    });
+  };
+
   const handleAddEdu = () => {
-    const newEduItem = { ...educationInfo, id: crypto.randomUUID() };
-    setEducationList([...educationList, newEduItem]);
+    if (editingId !== null) {
+      // Update existing education entry by id
+      const updatedList = educationList.map((item) =>
+        item.id === editingId ? { ...educationInfo, id: item.id } : item
+      );
+      setEducationList(updatedList);
+      setEditingId(null); // Reset editingId after updating
+    } else {
+      // Add new education entry
+      const newEduItem = { ...educationInfo, id: crypto.randomUUID() };
+      setEducationList([...educationList, newEduItem]);
+    }
+    clearEduInfo();
+  };
+
+  const handleEditEdu = (id) => {
+    const eduToEdit = educationList.find((item) => item.id === id);
+    setEducationInfo(eduToEdit);
+    setEditingId(id); // Set the id of the item being edited
   };
 
   return (
@@ -100,6 +133,8 @@ function App() {
         educationList={educationList}
         handleEduInfoChange={handleEduInfoChange}
         handleAddEdu={handleAddEdu}
+        handleEditEdu={handleEditEdu}
+        editingId={editingId}
       />
       <ResumePreview
         personalDetails={personalDetails}
