@@ -113,13 +113,17 @@ function ResumePreview({ personalDetails, image, educationList }) {
                         <div className={styles.eduName}>{item.eduName}</div>
                         <div className={styles.date}>
                           {monthNumberToLabelMap[item.startMonth]}{" "}
-                          {item.startYear} -{" "}
+                          {item.startYear}{" "}
+                          {(item.startMonth || item.startYear) &&
+                            (item.endMonth || item.endYear) &&
+                            "-"}{" "}
                           {monthNumberToLabelMap[item.endMonth]} {item.endYear}
                         </div>
                       </div>
 
                       <div className={styles.schoolCity}>
-                        {item.school}, {item.city}
+                        {item.school}
+                        {item.city && item.school && ", "} {item.city}
                       </div>
 
                       <div className={styles.desc}>{item.desc}</div>

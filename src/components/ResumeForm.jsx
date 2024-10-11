@@ -14,6 +14,7 @@ function ResumeForm({
   handleEduInfoChange,
   handleEditEdu,
   editingId,
+  setEditingId,
 }) {
   const [openIndex, setOpenIndex] = useState(null); // State to track which section is open
   const [displayForm, setDisplayForm] = useState(true);
@@ -177,22 +178,41 @@ function ResumeForm({
                     className={styles.eduEntry}
                     onClick={() => handleEdit(item.id)} // Open form for the clicked entry
                   >
-                    <div>{item.eduName}</div>
-                    <div>
-                      {item.school}, {item.city}
-                    </div>
+                    {item.eduName != "" ? (
+                      <div>{item.eduName}</div>
+                    ) : (
+                      <div>[Education]</div>
+                    )}
+                    {item.school != "" || item.city != "" ? (
+                      <div>
+                        {item.school}
+                        {item.city && item.school && ", "} {item.city}
+                      </div>
+                    ) : (
+                      <div>[School, City]</div>
+                    )}
                   </button>
                 )}
               </li>
             ))}
           </ul>
         )}
-        {displayForm && (
+        {displayForm ? (
           <EducationInput
             educationInfo={educationInfo}
             handleEduInfoChange={handleEduInfoChange}
             handleAddEdu={handleAddEdu}
           />
+        ) : (
+          <button
+            className={styles.addEntryButton}
+            onClick={() => {
+              setDisplayForm(true);
+              setEditingId(null);
+            }}
+          >
+            <div>Add education</div>
+          </button>
         )}
       </Dropdown>
 

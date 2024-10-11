@@ -135,6 +135,7 @@ function App() {
         handleAddEdu={handleAddEdu}
         handleEditEdu={handleEditEdu}
         editingId={editingId}
+        setEditingId={setEditingId}
       />
       <ResumePreview
         personalDetails={personalDetails}
