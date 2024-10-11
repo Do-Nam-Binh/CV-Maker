@@ -5,13 +5,12 @@ import EducationInput from "./EducationInput";
 
 function ResumeForm({
   personalDetails,
-  handlePersonalDetailChange,
   handleImageUpload,
   image,
   educationInfo,
   educationList,
   handleAddEdu,
-  handleEduInfoChange,
+  handleInfoChange,
   handleEditEdu,
   editingId,
   setEditingId,
@@ -66,7 +65,7 @@ function ResumeForm({
                     name="firstName"
                     id="firstName"
                     value={personalDetails.firstName}
-                    onChange={handlePersonalDetailChange}
+                    onChange={(e) => handleInfoChange(e, "personal")}
                   />
                 </div>
 
@@ -77,7 +76,7 @@ function ResumeForm({
                     name="lastName"
                     id="lastName"
                     value={personalDetails.lastName}
-                    onChange={handlePersonalDetailChange}
+                    onChange={(e) => handleInfoChange(e, "personal")}
                   />
                 </div>
               </div>
@@ -89,7 +88,7 @@ function ResumeForm({
                   name="headline"
                   id="headline"
                   value={personalDetails.headline}
-                  onChange={handlePersonalDetailChange}
+                  onChange={(e) => handleInfoChange(e, "personal")}
                 />
               </div>
             </div>
@@ -103,7 +102,7 @@ function ResumeForm({
                 name="email"
                 id="email"
                 value={personalDetails.email}
-                onChange={handlePersonalDetailChange}
+                onChange={(e) => handleInfoChange(e, "personal")}
               />
             </div>
 
@@ -115,7 +114,7 @@ function ResumeForm({
                 id="phone"
                 pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                 value={personalDetails.phone}
-                onChange={handlePersonalDetailChange}
+                onChange={(e) => handleInfoChange(e, "personal")}
               />
             </div>
           </div>
@@ -127,7 +126,7 @@ function ResumeForm({
               name="address"
               id="address"
               value={personalDetails.address}
-              onChange={handlePersonalDetailChange}
+              onChange={(e) => handleInfoChange(e, "personal")}
             />
           </div>
 
@@ -139,7 +138,7 @@ function ResumeForm({
                 name="postcode"
                 id="postcode"
                 value={personalDetails.postcode}
-                onChange={handlePersonalDetailChange}
+                onChange={(e) => handleInfoChange(e, "personal")}
               />
             </div>
 
@@ -150,7 +149,7 @@ function ResumeForm({
                 name="city"
                 id="city"
                 value={personalDetails.city}
-                onChange={handlePersonalDetailChange}
+                onChange={(e) => handleInfoChange(e, "personal")}
               />
             </div>
           </div>
@@ -169,7 +168,7 @@ function ResumeForm({
                 {editingId === item.id ? (
                   <EducationInput
                     educationInfo={educationInfo}
-                    handleEduInfoChange={handleEduInfoChange}
+                    handleInfoChange={handleInfoChange}
                     handleAddEdu={handleAddEdu}
                     setDisplayForm={setDisplayForm}
                   />
@@ -200,7 +199,7 @@ function ResumeForm({
         {displayForm ? (
           <EducationInput
             educationInfo={educationInfo}
-            handleEduInfoChange={handleEduInfoChange}
+            handleInfoChange={handleInfoChange}
             handleAddEdu={handleAddEdu}
           />
         ) : (

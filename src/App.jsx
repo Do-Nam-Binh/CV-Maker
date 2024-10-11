@@ -97,12 +97,21 @@ function App() {
     localStorage.setItem("employList", JSON.stringify(employmentList));
   }, [employmentList]);
 
-  function handlePersonalDetailChange(e) {
+  function handleInfoChange(e, type) {
     const { name, value } = e.target;
-    setPersonalDetails((prevPersonalDetails) => ({
-      ...prevPersonalDetails,
-      [name]: value,
-    }));
+    switch (type) {
+      case "personal":
+        setPersonalDetails((prevPersonalDetails) => ({
+          ...prevPersonalDetails,
+          [name]: value,
+        }));
+      case "education":
+        setEducationInfo((prevEduInfo) => ({
+          ...prevEduInfo,
+          [name]: value,
+        }));
+        break;
+    }
   }
 
   const handleImageUpload = (e) => {
@@ -115,14 +124,6 @@ function App() {
       reader.readAsDataURL(file);
     }
   };
-
-  function handleEduInfoChange(e) {
-    const { name, value } = e.target;
-    setEducationInfo((prevEduInfo) => ({
-      ...prevEduInfo,
-      [name]: value,
-    }));
-  }
 
   const clearEduInfo = () => {
     setEducationInfo({
@@ -164,11 +165,10 @@ function App() {
       <ResumeForm
         personalDetails={personalDetails}
         image={image}
-        handlePersonalDetailChange={handlePersonalDetailChange}
+        handleInfoChange={handleInfoChange}
         handleImageUpload={handleImageUpload}
         educationInfo={educationInfo}
         educationList={educationList}
-        handleEduInfoChange={handleEduInfoChange}
         handleAddEdu={handleAddEdu}
         handleEditEdu={handleEditEdu}
         editingId={editingId}

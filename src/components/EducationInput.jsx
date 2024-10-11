@@ -3,7 +3,7 @@ import styles from "../styles/ResumeForm.module.css";
 
 function EducationInput({
   educationInfo,
-  handleEduInfoChange,
+  handleInfoChange,
   handleAddEdu,
   setDisplayForm,
 }) {
@@ -46,7 +46,7 @@ function EducationInput({
           type="text"
           name="eduName"
           id={styles.eduNameInput}
-          onChange={handleEduInfoChange}
+          onChange={(e) => handleInfoChange(e, "education")}
           value={educationInfo.eduName}
         />
       </div>
@@ -58,7 +58,7 @@ function EducationInput({
             type="text"
             name="school"
             id={styles.schoolInput}
-            onChange={handleEduInfoChange}
+            onChange={(e) => handleInfoChange(e, "education")}
             value={educationInfo.school}
           />
         </div>
@@ -68,7 +68,7 @@ function EducationInput({
             type="text"
             name="city"
             id={styles.cityInput}
-            onChange={handleEduInfoChange}
+            onChange={(e) => handleInfoChange(e, "education")}
             value={educationInfo.city}
           />
         </div>
@@ -82,7 +82,7 @@ function EducationInput({
               <select
                 name="startMonth"
                 id="monthSelect"
-                onChange={handleEduInfoChange}
+                onChange={(e) => handleInfoChange(e, "education")}
                 value={educationInfo.startMonth}
               >
                 {Object.entries(months).map(([key, value]) => (
@@ -95,7 +95,7 @@ function EducationInput({
               <select
                 name="startYear"
                 id="yearSelect"
-                onChange={handleEduInfoChange}
+                onChange={(e) => handleInfoChange(e, "education")}
                 value={educationInfo.startYear}
               >
                 <option key="Year" value={null}>
@@ -116,7 +116,7 @@ function EducationInput({
               <select
                 name="endMonth"
                 id="monthSelect"
-                onChange={handleEduInfoChange}
+                onChange={(e) => handleInfoChange(e, "education")}
                 value={educationInfo.endMonth}
               >
                 {Object.entries(months).map(([key, value]) => (
@@ -129,7 +129,7 @@ function EducationInput({
               <select
                 name="endYear"
                 id="yearSelect"
-                onChange={handleEduInfoChange}
+                onChange={(e) => handleInfoChange(e, "education")}
                 value={educationInfo.endYear}
               >
                 <option key="Year" value={null}>
@@ -152,7 +152,7 @@ function EducationInput({
           name="desc"
           id={styles.descInput}
           rows="10"
-          onChange={handleEduInfoChange}
+          onChange={(e) => handleInfoChange(e, "education")}
           value={educationInfo.desc}
         ></textarea>
       </div>
