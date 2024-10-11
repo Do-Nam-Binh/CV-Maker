@@ -93,7 +93,8 @@
   height: 25px;
 }
 
-.eduListItem {
+.eduListItem,
+.employListItem {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -102,11 +103,13 @@
   font-weight: normal;
 }
 
-.eduListItem .eduName {
+.eduListItem .eduName,
+.employListItem .position {
   font-weight: bold;
 }
 
-.eduNameDate {
+.eduNameDate,
+.positionDate {
   display: flex;
   justify-content: space-between;
 }

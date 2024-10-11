@@ -53,7 +53,7 @@ function EmploymentInput({
 
       <div className={styles.schoolCity}>
         <div className={styles.inputEntry}>
-          <label htmlFor="employer">employer</label>
+          <label htmlFor="employer">Employer</label>
           <input
             type="text"
             name="employer"

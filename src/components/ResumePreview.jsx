@@ -3,7 +3,12 @@ import houseLogo from "../assets/house-chimney.svg";
 import emailLogo from "../assets/envelope.svg";
 import phoneLogo from "../assets/phone-flip.svg";
 
-function ResumePreview({ personalDetails, image, educationList }) {
+function ResumePreview({
+  personalDetails,
+  image,
+  educationList,
+  employmentList,
+}) {
   const showPersonalHeader =
     personalDetails.email ||
     personalDetails.phone ||
@@ -135,6 +140,32 @@ function ResumePreview({ personalDetails, image, educationList }) {
           )}
           <div className={styles.rightHeaders}>
             <div className={styles.rightHeadersLabel}>Employment</div>
+            <div className={styles.employList}>
+              <ul className={styles.employListItem}>
+                {employmentList.map((item) => (
+                  <li key={item.id}>
+                    <div className={styles.positionDate}>
+                      <div className={styles.position}>{item.position}</div>
+                      <div className={styles.date}>
+                        {monthNumberToLabelMap[item.startMonth]}{" "}
+                        {item.startYear}{" "}
+                        {(item.startMonth || item.startYear) &&
+                          (item.endMonth || item.endYear) &&
+                          "-"}{" "}
+                        {monthNumberToLabelMap[item.endMonth]} {item.endYear}
+                      </div>
+                    </div>
+
+                    <div className={styles.employerCity}>
+                      {item.employer}
+                      {item.city && item.employer && ", "} {item.city}
+                    </div>
+
+                    <div className={styles.desc}>{item.desc}</div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div className={styles.rightHeaders}>
             <div className={styles.rightHeadersLabel}>Projects</div>

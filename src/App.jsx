@@ -239,6 +239,7 @@ function App() {
         personalDetails={personalDetails}
         image={image}
         educationList={educationList}
+        employmentList={employmentList}
       />
     </>
   );
