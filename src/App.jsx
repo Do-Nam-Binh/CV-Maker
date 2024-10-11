@@ -21,6 +21,7 @@ function App() {
         };
   });
 
+  //Storing education information
   const [educationInfo, setEducationInfo] = useState(() => {
     const savedEduInfo = localStorage.getItem("eduInfo");
     return savedEduInfo
@@ -42,6 +43,28 @@ function App() {
     return savedEduList ? JSON.parse(savedEduList) : [];
   });
 
+  //Storing employment information
+  const [employmentInfo, setEmploymentInfo] = useState(() => {
+    const savedEmployInfo = localStorage.getItem("employInfo");
+    return savedEmployInfo
+      ? JSON.parse(savedEmployInfo)
+      : {
+          eduName: "",
+          school: "",
+          city: "",
+          startMonth: "",
+          startYear: "",
+          endMonth: "",
+          endYear: "",
+          desc: "",
+        };
+  });
+
+  const [employmentList, setEmploymentList] = useState(() => {
+    const savedEmployList = localStorage.getItem("employList");
+    return savedEmployList ? JSON.parse(savedEmployList) : [];
+  });
+
   const [image, setImage] = useState(
     localStorage.profileImg ? localStorage.profileImg : null
   );
@@ -56,9 +79,23 @@ function App() {
     localStorage.profileImg = image;
   }, [image]);
 
+  //Storing education in local storage
   useEffect(() => {
     localStorage.setItem("eduList", JSON.stringify(educationList));
   }, [educationList]);
+
+  useEffect(() => {
+    localStorage.setItem("eduInfo", JSON.stringify(educationInfo));
+  }, [educationInfo]);
+
+  //Storing employment in local storage
+  useEffect(() => {
+    localStorage.setItem("employInfo", JSON.stringify(employmentInfo));
+  }, [employmentInfo]);
+
+  useEffect(() => {
+    localStorage.setItem("employList", JSON.stringify(employmentList));
+  }, [employmentList]);
 
   function handlePersonalDetailChange(e) {
     const { name, value } = e.target;
