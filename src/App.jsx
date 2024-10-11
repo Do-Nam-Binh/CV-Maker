@@ -49,8 +49,8 @@ function App() {
     return savedEmployInfo
       ? JSON.parse(savedEmployInfo)
       : {
-          eduName: "",
-          school: "",
+          position: "",
+          employer: "",
           city: "",
           startMonth: "",
           startYear: "",
@@ -109,6 +109,12 @@ function App() {
       case "education":
         setEducationInfo((prevEduInfo) => ({
           ...prevEduInfo,
+          [name]: value,
+        }));
+        break;
+      case "employment":
+        setEmploymentInfo((prevEmployInfo) => ({
+          ...prevEmployInfo,
           [name]: value,
         }));
         break;
@@ -226,6 +232,8 @@ function App() {
         handleEdit={handleEdit}
         editingId={editingId}
         setEditingId={setEditingId}
+        employmentInfo={employmentInfo}
+        employmentList={employmentList}
       />
       <ResumePreview
         personalDetails={personalDetails}

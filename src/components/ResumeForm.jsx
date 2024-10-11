@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../styles/ResumeForm.module.css";
 import Dropdown from "./Dropdown";
 import EducationInput from "./EducationInput";
+import EmploymentInput from "./EmploymentInput";
 
 function ResumeForm({
   personalDetails,
@@ -14,6 +15,8 @@ function ResumeForm({
   handleEdit,
   editingId,
   setEditingId,
+  employmentInfo,
+  employmentList,
 }) {
   const [openIndex, setOpenIndex] = useState(null); // State to track which section is open
   const [displayForm, setDisplayForm] = useState(true);
@@ -201,6 +204,7 @@ function ResumeForm({
             educationInfo={educationInfo}
             handleInfoChange={handleInfoChange}
             handleAddOrEdit={handleAddOrEdit}
+            setDisplayForm={setDisplayForm}
           />
         ) : (
           <button
@@ -220,7 +224,59 @@ function ResumeForm({
         isOpen={openIndex === 2}
         toggle={() => handleToggle(2)}
       >
-        <p>Content for Employment</p>
+        {employmentList.length > 0 && (
+          <ul className={styles.formEduList}>
+            {employmentList.map((item) => (
+              <li key={item.id}>
+                {editingId === item.id ? (
+                  <EmploymentInput
+                    employmentInfo={employmentInfo}
+                    handleInfoChange={handleInfoChange}
+                    handleAddOrEdit={handleAddOrEdit}
+                    setDisplayForm={setDisplayForm}
+                  />
+                ) : (
+                  <button
+                    className={styles.eduEntry}
+                    onClick={() => handleEditSubmit(item.id, "employment")} // Open form for the clicked entry
+                  >
+                    {item.position != "" ? (
+                      <div>{item.position}</div>
+                    ) : (
+                      <div>[Position]</div>
+                    )}
+                    {item.employer != "" || item.city != "" ? (
+                      <div>
+                        {item.employer}
+                        {item.city && item.employer && ", "} {item.city}
+                      </div>
+                    ) : (
+                      <div>[Employer, City]</div>
+                    )}
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+        {displayForm ? (
+          <EmploymentInput
+            employmentInfo={employmentInfo}
+            handleInfoChange={handleInfoChange}
+            handleAddOrEdit={handleAddOrEdit}
+            setDisplayForm={setDisplayForm}
+          />
+        ) : (
+          <button
+            className={styles.addEntryButton}
+            onClick={() => {
+              setDisplayForm(true);
+              setEditingId(null);
+            }}
+          >
+            <div>Add employment</div>
+          </button>
+        )}
       </Dropdown>
 
       <Dropdown
