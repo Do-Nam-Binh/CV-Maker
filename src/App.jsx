@@ -105,6 +105,7 @@ function App() {
           ...prevPersonalDetails,
           [name]: value,
         }));
+        break;
       case "education":
         setEducationInfo((prevEduInfo) => ({
           ...prevEduInfo,
@@ -125,33 +126,78 @@ function App() {
     }
   };
 
-  const clearEduInfo = () => {
-    setEducationInfo({
-      eduName: "",
-      school: "",
-      city: "",
-      startMonth: "",
-      startYear: "",
-      endMonth: "",
-      endYear: "",
-      desc: "",
-    });
+  const clearInfo = (type) => {
+    switch (type) {
+      case "education":
+        setEducationInfo({
+          eduName: "",
+          school: "",
+          city: "",
+          startMonth: "",
+          startYear: "",
+          endMonth: "",
+          endYear: "",
+          desc: "",
+        });
+        break;
+      case "employment":
+        break;
+    }
   };
 
-  const handleAddEdu = () => {
-    if (editingId !== null) {
-      // Update existing education entry by id
-      const updatedList = educationList.map((item) =>
-        item.id === editingId ? { ...educationInfo, id: item.id } : item
-      );
-      setEducationList(updatedList);
-      setEditingId(null); // Reset editingId after updating
-    } else {
-      // Add new education entry
-      const newEduItem = { ...educationInfo, id: crypto.randomUUID() };
-      setEducationList([...educationList, newEduItem]);
+  // const handleAddEdu = (type) => {
+  //   if (editingId !== null) {
+  //     // Update existing education entry by id
+  //     const updatedList = educationList.map((item) =>
+  //       item.id === editingId ? { ...educationInfo, id: item.id } : item
+  //     );
+  //     setEducationList(updatedList);
+  //     setEditingId(null); // Reset editingId after updating
+  //   } else {
+  //     // Add new education entry
+  //     const newEduItem = { ...educationInfo, id: crypto.randomUUID() };
+  //     setEducationList([...educationList, newEduItem]);
+  //   }
+  //   clearEduInfo(type);
+  // };
+
+  const handleAddOrEdit = (type) => {
+    switch (type) {
+      case "education":
+        if (editingId) {
+          // Update existing education entry
+          const updatedList = educationList.map((item) =>
+            item.id === editingId ? { ...educationInfo, id: item.id } : item
+          );
+          setEducationList(updatedList);
+        } else {
+          // Add new education entry
+          const newEduItem = { ...educationInfo, id: crypto.randomUUID() };
+          setEducationList([...educationList, newEduItem]);
+        }
+        clearInfo("education");
+        break;
+
+      case "employment":
+        if (editingId) {
+          // Update existing employment entry
+          const updatedList = employmentList.map((item) =>
+            item.id === editingId ? { ...employmentInfo, id: item.id } : item
+          );
+          setEmploymentList(updatedList);
+        } else {
+          // Add new employment entry
+          const newEmployItem = { ...employmentInfo, id: crypto.randomUUID() };
+          setEmploymentList([...employmentList, newEmployItem]);
+        }
+        clearInfo("employment");
+        break;
+
+      default:
+        console.warn("Invalid type passed to handleAddOrEdit");
+        break;
     }
-    clearEduInfo();
+    setEditingId(null); // Reset editing id after add/edit
   };
 
   const handleEditEdu = (id) => {
@@ -169,7 +215,7 @@ function App() {
         handleImageUpload={handleImageUpload}
         educationInfo={educationInfo}
         educationList={educationList}
-        handleAddEdu={handleAddEdu}
+        handleAddOrEdit={handleAddOrEdit}
         handleEditEdu={handleEditEdu}
         editingId={editingId}
         setEditingId={setEditingId}

@@ -4,7 +4,7 @@ import styles from "../styles/ResumeForm.module.css";
 function EducationInput({
   educationInfo,
   handleInfoChange,
-  handleAddEdu,
+  handleAddOrEdit,
   setDisplayForm,
 }) {
   useEffect(() => {
@@ -33,8 +33,8 @@ function EducationInput({
     years.push(year);
   }
 
-  const handleSubmit = (e) => {
-    handleAddEdu(e);
+  const handleSubmit = (type) => {
+    handleAddOrEdit(type);
     setDisplayForm(true);
   };
 
@@ -157,7 +157,10 @@ function EducationInput({
         ></textarea>
       </div>
 
-      <button className={styles.submitEduInfo} onClick={handleSubmit}>
+      <button
+        className={styles.submitEduInfo}
+        onClick={() => handleSubmit("education")}
+      >
         Done
       </button>
     </div>

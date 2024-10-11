@@ -9,7 +9,7 @@ function ResumeForm({
   image,
   educationInfo,
   educationList,
-  handleAddEdu,
+  handleAddOrEdit,
   handleInfoChange,
   handleEditEdu,
   editingId,
@@ -169,7 +169,7 @@ function ResumeForm({
                   <EducationInput
                     educationInfo={educationInfo}
                     handleInfoChange={handleInfoChange}
-                    handleAddEdu={handleAddEdu}
+                    handleAddOrEdit={handleAddOrEdit}
                     setDisplayForm={setDisplayForm}
                   />
                 ) : (
@@ -200,7 +200,7 @@ function ResumeForm({
           <EducationInput
             educationInfo={educationInfo}
             handleInfoChange={handleInfoChange}
-            handleAddEdu={handleAddEdu}
+            handleAddOrEdit={handleAddOrEdit}
           />
         ) : (
           <button
