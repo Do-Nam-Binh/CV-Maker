@@ -38,10 +38,14 @@ function ResumePreview({
       <div className={styles.body}>
         <div className={styles.leftSide}>
           <div className={styles.nameHeadline}>
-            <div className={styles.name}>
-              <div>{personalDetails.firstName}</div>
-              <div>{personalDetails.lastName}</div>
-            </div>
+            {personalDetails.firstName || personalDetails.lastName ? (
+              <div className={styles.name}>
+                <div>{personalDetails.firstName}</div>
+                <div>{personalDetails.lastName}</div>
+              </div>
+            ) : (
+              <div className={styles.name}>Resume</div>
+            )}
 
             <div className={styles.headline}>{personalDetails.headline}</div>
 
@@ -138,35 +142,37 @@ function ResumePreview({
               </div>
             </div>
           )}
-          <div className={styles.rightHeaders}>
-            <div className={styles.rightHeadersLabel}>Employment</div>
-            <div className={styles.employList}>
-              <ul className={styles.employListItem}>
-                {employmentList.map((item) => (
-                  <li key={item.id}>
-                    <div className={styles.positionDate}>
-                      <div className={styles.position}>{item.position}</div>
-                      <div className={styles.date}>
-                        {monthNumberToLabelMap[item.startMonth]}{" "}
-                        {item.startYear}{" "}
-                        {(item.startMonth || item.startYear) &&
-                          (item.endMonth || item.endYear) &&
-                          "-"}{" "}
-                        {monthNumberToLabelMap[item.endMonth]} {item.endYear}
+          {employmentList.length > 0 && (
+            <div className={styles.rightHeaders}>
+              <div className={styles.rightHeadersLabel}>Employment</div>
+              <div className={styles.employList}>
+                <ul className={styles.employListItem}>
+                  {employmentList.map((item) => (
+                    <li key={item.id}>
+                      <div className={styles.positionDate}>
+                        <div className={styles.position}>{item.position}</div>
+                        <div className={styles.date}>
+                          {monthNumberToLabelMap[item.startMonth]}{" "}
+                          {item.startYear}{" "}
+                          {(item.startMonth || item.startYear) &&
+                            (item.endMonth || item.endYear) &&
+                            "-"}{" "}
+                          {monthNumberToLabelMap[item.endMonth]} {item.endYear}
+                        </div>
                       </div>
-                    </div>
 
-                    <div className={styles.employerCity}>
-                      {item.employer}
-                      {item.city && item.employer && ", "} {item.city}
-                    </div>
+                      <div className={styles.employerCity}>
+                        {item.employer}
+                        {item.city && item.employer && ", "} {item.city}
+                      </div>
 
-                    <div className={styles.desc}>{item.desc}</div>
-                  </li>
-                ))}
-              </ul>
+                      <div className={styles.desc}>{item.desc}</div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
+          )}
           <div className={styles.rightHeaders}>
             <div className={styles.rightHeadersLabel}>Projects</div>
           </div>
