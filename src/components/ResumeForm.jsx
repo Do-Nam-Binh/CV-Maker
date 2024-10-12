@@ -3,6 +3,8 @@ import styles from "../styles/ResumeForm.module.css";
 import Dropdown from "./Dropdown";
 import EducationInput from "./EducationInput";
 import EmploymentInput from "./EmploymentInput";
+import InfoInput from "./InfoInput";
+import InfoList from "./InfoList";
 
 function ResumeForm({
   personalDetails,
@@ -17,6 +19,7 @@ function ResumeForm({
   setEditingId,
   employmentInfo,
   employmentList,
+  clearInfo,
 }) {
   const [openIndex, setOpenIndex] = useState(null); // State to track which section is open
   const [displayForm, setDisplayForm] = useState(true);
@@ -27,8 +30,8 @@ function ResumeForm({
   };
 
   const handleEditSubmit = (id, type) => {
-    handleEdit(id, type);
     setDisplayForm(false);
+    handleEdit(id, type);
   };
 
   return (
@@ -165,57 +168,19 @@ function ResumeForm({
         toggle={() => handleToggle(1)}
       >
         {educationList.length > 0 && (
-          <ul className={styles.formEduList}>
-            {educationList.map((item) => (
-              <li key={item.id}>
-                {editingId === item.id ? (
-                  <EducationInput
-                    educationInfo={educationInfo}
-                    handleInfoChange={handleInfoChange}
-                    handleAddOrEdit={handleAddOrEdit}
-                    setDisplayForm={setDisplayForm}
-                  />
-                ) : (
-                  <button
-                    className={styles.eduEntry}
-                    onClick={() => handleEditSubmit(item.id, "education")} // Open form for the clicked entry
-                  >
-                    {item.eduName != "" ? (
-                      <div>{item.eduName}</div>
-                    ) : (
-                      <div>[Education]</div>
-                    )}
-                    {item.school != "" || item.city != "" ? (
-                      <div>
-                        {item.school}
-                        {item.city && item.school && ", "} {item.city}
-                      </div>
-                    ) : (
-                      <div>[School, City]</div>
-                    )}
-                  </button>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-        {displayForm ? (
-          <EducationInput
-            educationInfo={educationInfo}
+          <InfoList
+            list={educationList}
+            infoType="education"
+            infoData={educationInfo}
+            editingId={editingId}
+            displayForm={displayForm}
             handleInfoChange={handleInfoChange}
             handleAddOrEdit={handleAddOrEdit}
+            handleEditSubmit={handleEditSubmit}
             setDisplayForm={setDisplayForm}
+            setEditingId={setEditingId}
+            clearInfo={clearInfo}
           />
-        ) : (
-          <button
-            className={styles.addEntryButton}
-            onClick={() => {
-              setDisplayForm(true);
-              setEditingId(null);
-            }}
-          >
-            <div>Add education</div>
-          </button>
         )}
       </Dropdown>
 
@@ -225,57 +190,19 @@ function ResumeForm({
         toggle={() => handleToggle(2)}
       >
         {employmentList.length > 0 && (
-          <ul className={styles.formEduList}>
-            {employmentList.map((item) => (
-              <li key={item.id}>
-                {editingId === item.id ? (
-                  <EmploymentInput
-                    employmentInfo={employmentInfo}
-                    handleInfoChange={handleInfoChange}
-                    handleAddOrEdit={handleAddOrEdit}
-                    setDisplayForm={setDisplayForm}
-                  />
-                ) : (
-                  <button
-                    className={styles.eduEntry}
-                    onClick={() => handleEditSubmit(item.id, "employment")} // Open form for the clicked entry
-                  >
-                    {item.position != "" ? (
-                      <div>{item.position}</div>
-                    ) : (
-                      <div>[Position]</div>
-                    )}
-                    {item.employer != "" || item.city != "" ? (
-                      <div>
-                        {item.employer}
-                        {item.city && item.employer && ", "} {item.city}
-                      </div>
-                    ) : (
-                      <div>[Employer, City]</div>
-                    )}
-                  </button>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-        {displayForm ? (
-          <EmploymentInput
-            employmentInfo={employmentInfo}
+          <InfoList
+            list={employmentList}
+            infoType="employment"
+            infoData={employmentInfo}
+            editingId={editingId}
+            displayForm={displayForm}
             handleInfoChange={handleInfoChange}
             handleAddOrEdit={handleAddOrEdit}
+            handleEditSubmit={handleEditSubmit}
             setDisplayForm={setDisplayForm}
+            setEditingId={setEditingId}
+            clearInfo={clearInfo}
           />
-        ) : (
-          <button
-            className={styles.addEntryButton}
-            onClick={() => {
-              setDisplayForm(true);
-              setEditingId(null);
-            }}
-          >
-            <div>Add employment</div>
-          </button>
         )}
       </Dropdown>
 
@@ -299,6 +226,14 @@ function ResumeForm({
         title="Projects"
         isOpen={openIndex === 5}
         toggle={() => handleToggle(5)}
+      >
+        <p>Content for Languages</p>
+      </Dropdown>
+
+      <Dropdown
+        title="Hobbies"
+        isOpen={openIndex === 6}
+        toggle={() => handleToggle(6)}
       >
         <p>Content for Languages</p>
       </Dropdown>
