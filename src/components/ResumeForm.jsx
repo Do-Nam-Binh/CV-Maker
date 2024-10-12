@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import styles from "../styles/ResumeForm.module.css";
 import Dropdown from "./Dropdown";
-import EducationInput from "./EducationInput";
-import EmploymentInput from "./EmploymentInput";
-import InfoInput from "./InfoInput";
 import InfoList from "./InfoList";
 
 function ResumeForm({
