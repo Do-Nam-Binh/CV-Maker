@@ -80,7 +80,6 @@
 }
 
 .form {
-  margin: 10px 0px;
   padding: 20px;
   border: 1px solid rgb(90, 90, 90);
   border-radius: 10px;
@@ -128,15 +127,13 @@
 }
 
 .formEduList {
-  margin-top: 30px;
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
-.eduEntry,
-.addEntryButton {
+.eduEntry {
   width: 100%;
   padding: 20px 0px;
   background-color: white;
@@ -154,7 +151,13 @@
 }
 
 .addEntryButton {
-  margin: 30px 0px;
+  width: fit-content;
+  padding: 20px 0px;
+  background-color: white;
+  color: #000;
+  border: 1px solid black;
+  text-align: start;
+  justify-self: start;
 }
 
 .addEntryButton div {

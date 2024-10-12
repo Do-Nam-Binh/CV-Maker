@@ -11,7 +11,7 @@ const Dropdown = ({ title, children, isOpen, toggle }) => {
         className={styles.content}
         style={{ maxHeight: isOpen ? "1000px" : "0px" }}
       >
-        {children}
+        <div className={styles.contentInterior}>{children}</div>
       </div>
     </div>
   );

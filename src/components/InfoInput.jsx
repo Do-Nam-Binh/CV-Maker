@@ -31,7 +31,7 @@ function InfoInput({
 
   const handleSubmit = (type) => {
     handleAddOrEdit(type);
-    setDisplayForm(true);
+    setDisplayForm(false);
   };
 
   return (
