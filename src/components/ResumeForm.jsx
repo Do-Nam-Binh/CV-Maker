@@ -164,21 +164,19 @@ function ResumeForm({
         isOpen={openIndex === 1}
         toggle={() => handleToggle(1)}
       >
-        {educationList.length > 0 && (
-          <InfoList
-            list={educationList}
-            infoType="education"
-            infoData={educationInfo}
-            editingId={editingId}
-            displayForm={displayForm}
-            handleInfoChange={handleInfoChange}
-            handleAddOrEdit={handleAddOrEdit}
-            handleEditSubmit={handleEditSubmit}
-            setDisplayForm={setDisplayForm}
-            setEditingId={setEditingId}
-            clearInfo={clearInfo}
-          />
-        )}
+        <InfoList
+          list={educationList}
+          infoType="education"
+          infoData={educationInfo}
+          editingId={editingId}
+          displayForm={displayForm}
+          handleInfoChange={handleInfoChange}
+          handleAddOrEdit={handleAddOrEdit}
+          handleEditSubmit={handleEditSubmit}
+          setDisplayForm={setDisplayForm}
+          setEditingId={setEditingId}
+          clearInfo={clearInfo}
+        />
       </Dropdown>
 
       <Dropdown
@@ -186,21 +184,19 @@ function ResumeForm({
         isOpen={openIndex === 2}
         toggle={() => handleToggle(2)}
       >
-        {employmentList.length > 0 && (
-          <InfoList
-            list={employmentList}
-            infoType="employment"
-            infoData={employmentInfo}
-            editingId={editingId}
-            displayForm={displayForm}
-            handleInfoChange={handleInfoChange}
-            handleAddOrEdit={handleAddOrEdit}
-            handleEditSubmit={handleEditSubmit}
-            setDisplayForm={setDisplayForm}
-            setEditingId={setEditingId}
-            clearInfo={clearInfo}
-          />
-        )}
+        <InfoList
+          list={employmentList}
+          infoType="employment"
+          infoData={employmentInfo}
+          editingId={editingId}
+          displayForm={displayForm}
+          handleInfoChange={handleInfoChange}
+          handleAddOrEdit={handleAddOrEdit}
+          handleEditSubmit={handleEditSubmit}
+          setDisplayForm={setDisplayForm}
+          setEditingId={setEditingId}
+          clearInfo={clearInfo}
+        />
       </Dropdown>
 
       <Dropdown
