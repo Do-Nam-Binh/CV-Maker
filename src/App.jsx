@@ -205,6 +205,7 @@ function App() {
       case "education":
         const eduToEdit = educationList.find((item) => item.id === id);
         if (eduToEdit) setEducationInfo(eduToEdit);
+
         break;
 
       case "employment":
@@ -234,6 +235,7 @@ function App() {
         setEditingId={setEditingId}
         employmentInfo={employmentInfo}
         employmentList={employmentList}
+        clearInfo={clearInfo}
       />
       <ResumePreview
         personalDetails={personalDetails}
