@@ -35,7 +35,7 @@ function InfoInput({
   };
 
   return (
-    <div className={styles.eduForm}>
+    <div className={styles.form}>
       <div className={styles.inputEntry}>
         <label htmlFor="name">
           {infoType === "employment" ? "Employment" : "Education"}
@@ -49,7 +49,7 @@ function InfoInput({
         />
       </div>
 
-      <div className={styles.schoolCity}>
+      <div className={styles.secondRow}>
         <div className={styles.inputEntry}>
           <label
             htmlFor={
@@ -64,7 +64,7 @@ function InfoInput({
               ? "Employer"
               : infoType === "education"
               ? "School"
-              : "summary"}
+              : "Summary"}
           </label>
           <input
             type="text"
