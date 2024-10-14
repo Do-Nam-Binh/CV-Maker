@@ -118,6 +118,15 @@ function App() {
     localStorage.setItem("employList", JSON.stringify(employmentList));
   }, [employmentList]);
 
+  //Storing projects in local storage
+  useEffect(() => {
+    localStorage.setItem("projectInfo", JSON.stringify(projectInfo));
+  }, [projectInfo]);
+
+  useEffect(() => {
+    localStorage.setItem("projectList", JSON.stringify(projectList));
+  }, [projectList]);
+
   function handleInfoChange(e, type) {
     const { name, value } = e.target;
     switch (type) {

@@ -126,7 +126,7 @@
   background-color: rgb(177, 224, 240);
 }
 
-.formEduList {
+.formList {
   list-style-type: none;
   display: flex;
   flex-direction: column;

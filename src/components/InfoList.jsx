@@ -18,7 +18,7 @@ function InfoList({
   return (
     <>
       {list.length > 0 && (
-        <ul className={styles.formEduList}>
+        <ul className={styles.formList}>
           {list.map((item) => (
             <li key={item.id}>
               {editingId === item.id ? (
