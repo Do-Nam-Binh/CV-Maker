@@ -16,6 +16,8 @@ function ResumeForm({
   setEditingId,
   employmentInfo,
   employmentList,
+  projectInfo,
+  projectList,
   clearInfo,
 }) {
   const [openIndex, setOpenIndex] = useState(null); // State to track which section is open
@@ -220,7 +222,19 @@ function ResumeForm({
         isOpen={openIndex === 5}
         toggle={() => handleToggle(5)}
       >
-        <p>Content for Languages</p>
+         <InfoList
+          list={projectList}
+          infoType="projects"
+          infoData={projectInfo}
+          editingId={editingId}
+          displayForm={displayForm}
+          handleInfoChange={handleInfoChange}
+          handleAddOrEdit={handleAddOrEdit}
+          handleEditSubmit={handleEditSubmit}
+          setDisplayForm={setDisplayForm}
+          setEditingId={setEditingId}
+          clearInfo={clearInfo}
+        />
       </Dropdown>
 
       <Dropdown

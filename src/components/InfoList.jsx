@@ -70,15 +70,15 @@ function InfoList({
                   ) : (
                     // Handle projects
                     <>
-                      {item.projectName ? (
-                        <div>{item.projectName}</div>
+                      {item.title ? (
+                        <div>{item.title}</div>
                       ) : (
                         <div>[Project]</div>
                       )}
-                      {item.description ? (
-                        <div>{item.description}</div>
+                      {item.summary ? (
+                        <div>{item.summary}</div>
                       ) : (
-                        <div>[Description]</div>
+                        <div>[Summary]</div>
                       )}
                     </>
                   )}

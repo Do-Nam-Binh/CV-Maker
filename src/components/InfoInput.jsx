@@ -38,18 +38,40 @@ function InfoInput({
     <div className={styles.form}>
       <div className={styles.inputEntry}>
         <label htmlFor="name">
-          {infoType === "employment" ? "Employment" : "Education"}
+          {infoType === "employment"
+            ? "Employment"
+            : infoType === "education"
+            ? "Education"
+            : "Title"}
         </label>
         <input
           type="text"
-          name={infoType === "employment" ? "position" : "eduName"}
+          name={
+            infoType === "employment"
+              ? "position"
+              : infoType === "education"
+              ? "eduName"
+              : "title"
+          }
           id={styles.eduNameInput}
           onChange={(e) => handleInfoChange(e, infoType)}
-          value={infoData[infoType === "employment" ? "position" : "eduName"]}
+          value={
+            infoData[
+              infoType === "employment"
+                ? "position"
+                : infoType === "education"
+                ? "eduName"
+                : "title"
+            ]
+          }
         />
       </div>
 
-      <div className={styles.secondRow}>
+      <div
+        className={
+          infoType !== "projects" ? styles.secondRow : styles.projectSummary
+        }
+      >
         <div className={styles.inputEntry}>
           <label
             htmlFor={

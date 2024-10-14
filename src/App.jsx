@@ -65,6 +65,27 @@ function App() {
     return savedEmployList ? JSON.parse(savedEmployList) : [];
   });
 
+  //Storing projects information
+  const [projectInfo, setProjectInfo] = useState(() => {
+    const savedProjectInfo = localStorage.getItem("projectInfo");
+    return savedProjectInfo
+      ? JSON.parse(savedProjectInfo)
+      : {
+          title: "",
+          summary: "",
+          startMonth: "",
+          startYear: "",
+          endMonth: "",
+          endYear: "",
+          desc: "",
+        };
+  });
+
+  const [projectList, setProjectList] = useState(() => {
+    const savedProjectList = localStorage.getItem("projectList");
+    return savedProjectList ? JSON.parse(savedProjectList) : [];
+  });
+
   const [image, setImage] = useState(
     localStorage.profileImg ? localStorage.profileImg : null
   );
@@ -118,6 +139,12 @@ function App() {
           [name]: value,
         }));
         break;
+      case "projects":
+        setProjectInfo((prevProjectInfo) => ({
+          ...prevProjectInfo,
+          [name]: value,
+        }));
+        break;
     }
   }
 
@@ -151,6 +178,17 @@ function App() {
           position: "",
           employer: "",
           city: "",
+          startMonth: "",
+          startYear: "",
+          endMonth: "",
+          endYear: "",
+          desc: "",
+        });
+        break;
+      case "projects":
+        setProjectInfo({
+          title: "",
+          summary: "",
           startMonth: "",
           startYear: "",
           endMonth: "",
@@ -193,6 +231,21 @@ function App() {
         clearInfo("employment");
         break;
 
+      case "projects":
+        if (editingId) {
+          // Update existing employment entry
+          const updatedList = projectList.map((item) =>
+            item.id === editingId ? { ...projectInfo, id: item.id } : item
+          );
+          setProjectList(updatedList);
+        } else {
+          // Add new employment entry
+          const newProjectItem = { ...projectInfo, id: crypto.randomUUID() };
+          setProjectList([...projectList, newProjectItem]);
+        }
+        clearInfo("projects");
+        break;
+
       default:
         console.warn("Invalid type passed to handleAddOrEdit");
         break;
@@ -211,6 +264,11 @@ function App() {
       case "employment":
         const employToEdit = employmentList.find((item) => item.id === id);
         if (employToEdit) setEmploymentInfo(employToEdit);
+        break;
+
+      case "projects":
+        const projectToEdit = projectList.find((item) => item.id === id);
+        if (projectToEdit) setProjectInfo(projectToEdit);
         break;
 
       default:
@@ -235,6 +293,8 @@ function App() {
         setEditingId={setEditingId}
         employmentInfo={employmentInfo}
         employmentList={employmentList}
+        projectInfo={projectInfo}
+        projectList={projectList}
         clearInfo={clearInfo}
       />
       <ResumePreview
@@ -242,6 +302,7 @@ function App() {
         image={image}
         educationList={educationList}
         employmentList={employmentList}
+        projectList={projectList}
       />
     </>
   );

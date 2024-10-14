@@ -43,7 +43,7 @@
 .leftHeadersLabel {
   font-size: 1.5rem;
   color: #2c3e50;
-  margin-top: 20px;
+  margin-top: 10px;
   border-bottom: 1px solid #ccc;
   margin-bottom: 15px;
   font-weight: bold;
@@ -93,8 +93,7 @@
   height: 25px;
 }
 
-.eduListItem,
-.employListItem {
+.listItem {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -103,13 +102,11 @@
   font-weight: normal;
 }
 
-.eduListItem .eduName,
-.employListItem .position {
+.listItem .firstEntry{
   font-weight: bold;
 }
 
-.eduNameDate,
-.positionDate {
+.nameDate {
   display: flex;
   justify-content: space-between;
 }
