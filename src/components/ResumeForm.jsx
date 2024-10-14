@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../styles/ResumeForm.module.css";
 import Dropdown from "./Dropdown";
 import InfoList from "./InfoList";
+import MinorInfoInput from "./MinorInfoInput";
 
 function ResumeForm({
   personalDetails,
@@ -18,6 +19,9 @@ function ResumeForm({
   employmentList,
   projectInfo,
   projectList,
+  skillInfo,
+  languageInfo,
+  hobbyInfo,
   clearInfo,
 }) {
   const [openIndex, setOpenIndex] = useState(null); // State to track which section is open
@@ -222,7 +226,7 @@ function ResumeForm({
         isOpen={openIndex === 5}
         toggle={() => handleToggle(5)}
       >
-         <InfoList
+        <InfoList
           list={projectList}
           infoType="projects"
           infoData={projectInfo}
@@ -242,7 +246,13 @@ function ResumeForm({
         isOpen={openIndex === 6}
         toggle={() => handleToggle(6)}
       >
-        <p>Content for Languages</p>
+        <MinorInfoInput
+          infoType="hobbies"
+          infoData={hobbyInfo}
+          handleInfoChange={handleInfoChange}
+          handleAddOrEdit={handleAddOrEdit}
+          displayForm={displayForm}
+        />
       </Dropdown>
     </div>
   );

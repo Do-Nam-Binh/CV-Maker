@@ -208,7 +208,7 @@ function InfoInput({
       </div>
 
       <button
-        className={styles.submitEduInfo}
+        className={styles.submitInfo}
         onClick={() => handleSubmit(infoType)}
       >
         Done

@@ -86,6 +86,15 @@ function App() {
     return savedProjectList ? JSON.parse(savedProjectList) : [];
   });
 
+  //Storing skills, languages & hobby information
+  const [skillInfo, setSkillInfo] = useState({ name: "", level: 0 });
+  const [languageInfo, setLanguageInfo] = useState({ name: "", level: 0 });
+  const [hobbyInfo, setHobbyInfo] = useState({ name: "" });
+
+  const [skillList, setSkillList] = useState([]);
+  const [languageList, setLanguageList] = useState([]);
+  const [hobbyList, setHobbyList] = useState([]);
+
   const [image, setImage] = useState(
     localStorage.profileImg ? localStorage.profileImg : null
   );
@@ -129,32 +138,22 @@ function App() {
 
   function handleInfoChange(e, type) {
     const { name, value } = e.target;
-    switch (type) {
-      case "personal":
-        setPersonalDetails((prevPersonalDetails) => ({
-          ...prevPersonalDetails,
-          [name]: value,
-        }));
-        break;
-      case "education":
-        setEducationInfo((prevEduInfo) => ({
-          ...prevEduInfo,
-          [name]: value,
-        }));
-        break;
-      case "employment":
-        setEmploymentInfo((prevEmployInfo) => ({
-          ...prevEmployInfo,
-          [name]: value,
-        }));
-        break;
-      case "projects":
-        setProjectInfo((prevProjectInfo) => ({
-          ...prevProjectInfo,
-          [name]: value,
-        }));
-        break;
-    }
+
+    const infoMap = {
+      personal: setPersonalDetails,
+      education: setEducationInfo,
+      employment: setEmploymentInfo,
+      projects: setProjectInfo,
+      skills: setSkillInfo,
+      languages: setLanguageInfo,
+      hobbies: setHobbyInfo,
+    };
+
+    const setInfo = infoMap[type] || "";
+    setInfo((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
   }
 
   const handleImageUpload = (e) => {
@@ -209,57 +208,30 @@ function App() {
   };
 
   const handleAddOrEdit = (type) => {
-    switch (type) {
-      case "education":
-        if (editingId) {
-          // Update existing education entry
-          const updatedList = educationList.map((item) =>
-            item.id === editingId ? { ...educationInfo, id: item.id } : item
-          );
-          setEducationList(updatedList);
-        } else {
-          // Add new education entry
-          const newEduItem = { ...educationInfo, id: crypto.randomUUID() };
-          setEducationList([...educationList, newEduItem]);
-        }
-        clearInfo("education");
-        break;
+    const infoMap = {
+      education: [educationList, setEducationList, educationInfo],
+      employment: [employmentList, setEmploymentList, employmentInfo],
+      projects: [projectList, setProjectList, projectInfo],
+      skills: [skillList, setSkillList, skillInfo],
+      languages: [languageList, setLanguageList, languageInfo],
+      hobbies: [hobbyList, setHobbyList, hobbyInfo],
+    };
 
-      case "employment":
-        if (editingId) {
-          // Update existing employment entry
-          const updatedList = employmentList.map((item) =>
-            item.id === editingId ? { ...employmentInfo, id: item.id } : item
-          );
-          setEmploymentList(updatedList);
-        } else {
-          // Add new employment entry
-          const newEmployItem = { ...employmentInfo, id: crypto.randomUUID() };
-          setEmploymentList([...employmentList, newEmployItem]);
-        }
-        clearInfo("employment");
-        break;
+    const [list, setList, info] = infoMap[type] || [];
 
-      case "projects":
-        if (editingId) {
-          // Update existing employment entry
-          const updatedList = projectList.map((item) =>
-            item.id === editingId ? { ...projectInfo, id: item.id } : item
-          );
-          setProjectList(updatedList);
-        } else {
-          // Add new employment entry
-          const newProjectItem = { ...projectInfo, id: crypto.randomUUID() };
-          setProjectList([...projectList, newProjectItem]);
-        }
-        clearInfo("projects");
-        break;
+    if (list) {
+      const updatedList = editingId
+        ? list.map((item) =>
+            item.id === editingId ? { ...info, id: item.id } : item
+          )
+        : [...list, { ...info, id: crypto.randomUUID() }];
 
-      default:
-        console.warn("Invalid type passed to handleAddOrEdit");
-        break;
+      setList(updatedList);
+      clearInfo(type);
+      setEditingId(null);
+    } else {
+      console.warn("Invalid type passed to handleAddOrEdit");
     }
-    setEditingId(null); // Reset editing id after add/edit
   };
 
   const handleEdit = (id, type) => {
@@ -304,6 +276,9 @@ function App() {
         employmentList={employmentList}
         projectInfo={projectInfo}
         projectList={projectList}
+        skillInfo={skillInfo}
+        languageInfo={languageInfo}
+        hobbyInfo={hobbyInfo}
         clearInfo={clearInfo}
       />
       <ResumePreview
