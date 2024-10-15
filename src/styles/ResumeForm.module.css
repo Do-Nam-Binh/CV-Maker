@@ -135,15 +135,19 @@
 
 .displayEntry {
   width: 100%;
-  padding: 20px 0px;
+  padding: 20px 30px;
   background-color: white;
   color: #000;
   border: 1px solid black;
+  border-radius: 10px;
   text-align: start;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.displayEntry div {
-  margin: 0px 30px;
+.displayEntry:hover {
+  background-color: rgb(243, 243, 243);
 }
 
 .displayEntry {
@@ -168,4 +172,14 @@
   font-size: 1.2rem;
   margin: 0px 30px;
   font-weight: bold;
+}
+
+.deleteButton {
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 10px 15px;
+}
+
+.deleteButton:hover {
+  background-color: rgb(238, 21, 21);
 }

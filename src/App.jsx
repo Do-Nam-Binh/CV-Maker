@@ -325,6 +325,21 @@ function App() {
     setEditingId(id); // Track the entry being edited
   };
 
+  const handleDelete = (itemId, type) => {
+    const infoMap = {
+      education: [setEducationList, educationList],
+      employment: [setEmploymentList, employmentList],
+      projects: [setProjectList, projectList],
+      skills: [setSkillList, skillList],
+      languages: [setLanguageList, languageList],
+      hobbies: [setHobbyList, hobbyList],
+    };
+
+    const [setList, list] = infoMap[type] || [];
+
+    setList(list.filter((item) => item.id !== itemId));
+  };
+
   return (
     <>
       <ResumeForm
@@ -349,6 +364,7 @@ function App() {
         hobbyInfo={hobbyInfo}
         hobbyList={hobbyList}
         clearInfo={clearInfo}
+        handleDelete={handleDelete}
       />
       <ResumePreview
         personalDetails={personalDetails}

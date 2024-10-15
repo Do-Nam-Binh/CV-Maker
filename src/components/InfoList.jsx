@@ -14,7 +14,13 @@ function InfoList({
   setDisplayForm,
   setEditingId,
   clearInfo,
+  handleDelete,
 }) {
+  const confirmDelete = (itemId, infoType) => {
+    if (window.confirm("Are you sure you want to delete this item?")) {
+      handleDelete(itemId, infoType); // Call the delete function passed from the parent
+    }
+  };
   return (
     <>
       {list.length > 0 && (
@@ -30,59 +36,72 @@ function InfoList({
                   setDisplayForm={setDisplayForm}
                 />
               ) : (
-                <button
+                <div
                   className={styles.displayEntry}
                   onClick={() => handleEditSubmit(item.id, infoType)}
                 >
-                  {/* Display based on the type of info (education/employment/projects) */}
-                  {infoType === "education" ? (
-                    <>
-                      {item.eduName ? (
-                        <div>{item.eduName}</div>
-                      ) : (
-                        <div>[Education]</div>
-                      )}
-                      {item.school || item.city ? (
-                        <div>
-                          {item.school}
-                          {item.city && item.school && ", "} {item.city}
-                        </div>
-                      ) : (
-                        <div>[School, City]</div>
-                      )}
-                    </>
-                  ) : infoType === "employment" ? (
-                    <>
-                      {item.position ? (
-                        <div>{item.position}</div>
-                      ) : (
-                        <div>[Employment]</div>
-                      )}
-                      {item.employer || item.city ? (
-                        <div>
-                          {item.employer}
-                          {item.city && item.employer && ", "} {item.city}
-                        </div>
-                      ) : (
-                        <div>[Employer, City]</div>
-                      )}
-                    </>
-                  ) : (
-                    // Handle projects
-                    <>
-                      {item.title ? (
-                        <div>{item.title}</div>
-                      ) : (
-                        <div>[Project]</div>
-                      )}
-                      {item.summary ? (
-                        <div>{item.summary}</div>
-                      ) : (
-                        <div>[Summary]</div>
-                      )}
-                    </>
-                  )}
-                </button>
+                  <div>
+                    {" "}
+                    {/* Display based on the type of info (education/employment/projects) */}
+                    {infoType === "education" ? (
+                      <>
+                        {item.eduName ? (
+                          <div>{item.eduName}</div>
+                        ) : (
+                          <div>[Education]</div>
+                        )}
+                        {item.school || item.city ? (
+                          <div>
+                            {item.school}
+                            {item.city && item.school && ", "} {item.city}
+                          </div>
+                        ) : (
+                          <div>[School, City]</div>
+                        )}
+                      </>
+                    ) : infoType === "employment" ? (
+                      <>
+                        {item.position ? (
+                          <div>{item.position}</div>
+                        ) : (
+                          <div>[Employment]</div>
+                        )}
+                        {item.employer || item.city ? (
+                          <div>
+                            {item.employer}
+                            {item.city && item.employer && ", "} {item.city}
+                          </div>
+                        ) : (
+                          <div>[Employer, City]</div>
+                        )}
+                      </>
+                    ) : (
+                      // Handle projects
+                      <>
+                        {item.title ? (
+                          <div>{item.title}</div>
+                        ) : (
+                          <div>[Project]</div>
+                        )}
+                        {item.summary ? (
+                          <div>{item.summary}</div>
+                        ) : (
+                          <div>[Summary]</div>
+                        )}
+                      </>
+                    )}
+                  </div>
+
+                  <div
+                    className={styles.deleteButton}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      confirmDelete(item.id, infoType);
+                    }}
+                  >
+                    X
+                  </div>
+                </div>
               )}
             </li>
           ))}

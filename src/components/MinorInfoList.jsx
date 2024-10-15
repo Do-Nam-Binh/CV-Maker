@@ -14,6 +14,7 @@ function MinorInfoList({
   setDisplayForm,
   setEditingId,
   clearInfo,
+  handleDelete,
 }) {
   const skillLevel = [
     "Make a choice",
@@ -32,6 +33,13 @@ function MinorInfoList({
     "Very Good",
     "Fluent",
   ];
+
+  const confirmDelete = (itemId, infoType) => {
+    if (window.confirm("Are you sure you want to delete this item?")) {
+      handleDelete(itemId, infoType); // Call the delete function passed from the parent
+    }
+  };
+
   return (
     <>
       {list.length > 0 && (
@@ -47,41 +55,61 @@ function MinorInfoList({
                   setDisplayForm={setDisplayForm}
                 />
               ) : (
-                <button
+                <div
                   className={styles.displayEntry}
                   onClick={() => handleEditSubmit(item.id, infoType)}
                 >
-                  {/* Display based on the type of info (skills|languages|hobbies) */}
-                  {infoType === "hobbies" ? (
-                    <>
-                      {item.name ? <div>{item.name}</div> : <div>[Hobby]</div>}
-                    </>
-                  ) : infoType === "skills" ? (
-                    <>
-                      {item.name ? <div>{item.name}</div> : <div>[Skill]</div>}
-                    </>
-                  ) : (
-                    <>
-                      {item.name ? (
-                        <div>{item.name}</div>
-                      ) : (
-                        <div>[Language]</div>
-                      )}
-                    </>
-                  )}
+                  <div>
+                    {" "}
+                    {/* Display based on the type of info (skills|languages|hobbies) */}
+                    {infoType === "hobbies" ? (
+                      <>
+                        {item.name ? (
+                          <div>{item.name}</div>
+                        ) : (
+                          <div>[Hobby]</div>
+                        )}
+                      </>
+                    ) : infoType === "skills" ? (
+                      <>
+                        {item.name ? (
+                          <div>{item.name}</div>
+                        ) : (
+                          <div>[Skill]</div>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {item.name ? (
+                          <div>{item.name}</div>
+                        ) : (
+                          <div>[Language]</div>
+                        )}
+                      </>
+                    )}
+                    {infoType === "skills" ? (
+                      <div className={styles.levelDisplay}>
+                        {skillLevel[item.level]}
+                      </div>
+                    ) : infoType === "languages" ? (
+                      <div className={styles.levelDisplay}>
+                        {languageLevel[item.level]}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
 
-                  {infoType === "skills" ? (
-                    <div className={styles.levelDisplay}>
-                      {skillLevel[item.level]}
-                    </div>
-                  ) : infoType === "languages" ? (
-                    <div className={styles.levelDisplay}>
-                      {languageLevel[item.level]}
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </button>
+                  <div
+                    className={styles.deleteButton}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      confirmDelete(item.id, infoType);
+                    }}
+                  >
+                    X
+                  </div>
+                </div>
               )}
             </li>
           ))}

@@ -26,6 +26,7 @@ function ResumeForm({
   hobbyInfo,
   hobbyList,
   clearInfo,
+  handleDelete,
 }) {
   const [openIndex, setOpenIndex] = useState(null); // State to track which section is open
   const [displayForm, setDisplayForm] = useState(true);
@@ -185,6 +186,7 @@ function ResumeForm({
           setDisplayForm={setDisplayForm}
           setEditingId={setEditingId}
           clearInfo={clearInfo}
+          handleDelete={handleDelete}
         />
       </Dropdown>
 
@@ -205,6 +207,7 @@ function ResumeForm({
           setDisplayForm={setDisplayForm}
           setEditingId={setEditingId}
           clearInfo={clearInfo}
+          handleDelete={handleDelete}
         />
       </Dropdown>
 
@@ -225,6 +228,7 @@ function ResumeForm({
           setDisplayForm={setDisplayForm}
           setEditingId={setEditingId}
           clearInfo={clearInfo}
+          handleDelete={handleDelete}
         />
       </Dropdown>
 
@@ -245,6 +249,7 @@ function ResumeForm({
           setDisplayForm={setDisplayForm}
           setEditingId={setEditingId}
           clearInfo={clearInfo}
+          handleDelete={handleDelete}
         />
       </Dropdown>
 
@@ -265,6 +270,7 @@ function ResumeForm({
           setDisplayForm={setDisplayForm}
           setEditingId={setEditingId}
           clearInfo={clearInfo}
+          handleDelete={handleDelete}
         />
       </Dropdown>
 
@@ -285,6 +291,7 @@ function ResumeForm({
           setDisplayForm={setDisplayForm}
           setEditingId={setEditingId}
           clearInfo={clearInfo}
+          handleDelete={handleDelete}
         />
       </Dropdown>
     </div>
