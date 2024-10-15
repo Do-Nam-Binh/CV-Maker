@@ -9,6 +9,9 @@ function ResumePreview({
   educationList,
   employmentList,
   projectList,
+  skillList,
+  languageList,
+  hobbyList,
 }) {
   const showPersonalHeader =
     personalDetails.email ||
@@ -100,15 +103,75 @@ function ResumePreview({
               </div>
             )}
           </div>
-          <div className={styles.leftHeaders}>
-            <div className={styles.leftHeadersLabel}>Skills</div>
-          </div>
-          <div className={styles.leftHeaders}>
-            <div className={styles.leftHeadersLabel}>Languages</div>
-          </div>
-          <div className={styles.leftHeaders}>
-            <div className={styles.leftHeadersLabel}>Hobbies</div>
-          </div>
+          {skillList.length > 0 && (
+            <div className={styles.leftHeaders}>
+              <div className={styles.leftHeadersLabel}>Skills</div>
+
+              <ul className={styles.listItem}>
+                {skillList.map((item) => (
+                  <li key={item.id}>
+                    <div className={styles.leftsideName}>
+                      <div>{item.name}</div>
+                      <div>
+                        {[...Array(5)].map((circle, index) => (
+                          <span
+                            key={index}
+                            style={{
+                              color: index < item.level ? "#000" : "#CCCCCC", // Filled: black, Empty: grey
+                              fontSize: "20px",
+                            }}
+                          >
+                            {index < item.level ? "●" : "○"}{" "}
+                            {/* Filled vs empty circle */}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {languageList.length > 0 && (
+            <div className={styles.leftHeaders}>
+              <div className={styles.leftHeadersLabel}>Languages</div>
+              <ul className={styles.listItem}>
+                {languageList.map((item) => (
+                  <li key={item.id}>
+                    <div className={styles.leftsideName}>
+                      <div>{item.name}</div>
+                      <div>
+                        {[...Array(5)].map((circle, index) => (
+                          <span
+                            key={index}
+                            style={{
+                              color: index < item.level ? "#000" : "#CCCCCC", // Filled: black, Empty: grey
+                              fontSize: "20px",
+                            }}
+                          >
+                            {index < item.level ? "●" : "○"}{" "}
+                            {/* Filled vs empty circle */}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {hobbyList.length > 0 && (
+            <div className={styles.leftHeaders}>
+              <div className={styles.leftHeadersLabel}>Hobbies</div>
+              <ul className={styles.listItem}>
+                {hobbyList.map((item) => (
+                  <li key={item.id}>
+                    <div className={styles.leftsideName}>{item.name}</div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         <div className={styles.rightSide}>

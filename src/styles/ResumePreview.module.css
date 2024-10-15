@@ -102,11 +102,17 @@
   font-weight: normal;
 }
 
-.listItem .firstEntry{
+.listItem .firstEntry {
   font-weight: bold;
 }
 
 .nameDate {
   display: flex;
   justify-content: space-between;
+}
+
+.leftsideName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

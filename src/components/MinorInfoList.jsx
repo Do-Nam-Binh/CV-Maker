@@ -1,8 +1,8 @@
 import React from "react";
-import InfoInput from "./InfoInput";
 import styles from "../styles/ResumeForm.module.css";
+import MinorInfoInput from "./MinorInfoInput";
 
-function InfoList({
+function MinorInfoList({
   list,
   infoType,
   infoData,
@@ -15,6 +15,23 @@ function InfoList({
   setEditingId,
   clearInfo,
 }) {
+  const skillLevel = [
+    "Make a choice",
+    "Beginner",
+    "Moderate",
+    "Good",
+    "Very Good",
+    "Excellent",
+  ];
+
+  const languageLevel = [
+    "Make a choice",
+    "Beginner",
+    "Moderate",
+    "Good",
+    "Very Good",
+    "Fluent",
+  ];
   return (
     <>
       {list.length > 0 && (
@@ -22,7 +39,7 @@ function InfoList({
           {list.map((item) => (
             <li key={item.id}>
               {editingId === item.id ? (
-                <InfoInput
+                <MinorInfoInput
                   infoType={infoType}
                   infoData={infoData}
                   handleInfoChange={handleInfoChange}
@@ -34,53 +51,35 @@ function InfoList({
                   className={styles.displayEntry}
                   onClick={() => handleEditSubmit(item.id, infoType)}
                 >
-                  {/* Display based on the type of info (education/employment/projects) */}
-                  {infoType === "education" ? (
+                  {/* Display based on the type of info (skills|languages|hobbies) */}
+                  {infoType === "hobbies" ? (
                     <>
-                      {item.eduName ? (
-                        <div>{item.eduName}</div>
-                      ) : (
-                        <div>[Education]</div>
-                      )}
-                      {item.school || item.city ? (
-                        <div>
-                          {item.school}
-                          {item.city && item.school && ", "} {item.city}
-                        </div>
-                      ) : (
-                        <div>[School, City]</div>
-                      )}
+                      {item.name ? <div>{item.name}</div> : <div>[Hobby]</div>}
                     </>
-                  ) : infoType === "employment" ? (
+                  ) : infoType === "skills" ? (
                     <>
-                      {item.position ? (
-                        <div>{item.position}</div>
-                      ) : (
-                        <div>[Employment]</div>
-                      )}
-                      {item.employer || item.city ? (
-                        <div>
-                          {item.employer}
-                          {item.city && item.employer && ", "} {item.city}
-                        </div>
-                      ) : (
-                        <div>[Employer, City]</div>
-                      )}
+                      {item.name ? <div>{item.name}</div> : <div>[Skill]</div>}
                     </>
                   ) : (
-                    // Handle projects
                     <>
-                      {item.title ? (
-                        <div>{item.title}</div>
+                      {item.name ? (
+                        <div>{item.name}</div>
                       ) : (
-                        <div>[Project]</div>
-                      )}
-                      {item.summary ? (
-                        <div>{item.summary}</div>
-                      ) : (
-                        <div>[Summary]</div>
+                        <div>[Language]</div>
                       )}
                     </>
+                  )}
+
+                  {infoType === "skills" ? (
+                    <div className={styles.levelDisplay}>
+                      {skillLevel[item.level]}
+                    </div>
+                  ) : infoType === "languages" ? (
+                    <div className={styles.levelDisplay}>
+                      {languageLevel[item.level]}
+                    </div>
+                  ) : (
+                    ""
                   )}
                 </button>
               )}
@@ -89,7 +88,7 @@ function InfoList({
         </ul>
       )}
       {displayForm ? (
-        <InfoInput
+        <MinorInfoInput
           infoType={infoType}
           infoData={infoData}
           handleInfoChange={handleInfoChange}
@@ -112,4 +111,4 @@ function InfoList({
   );
 }
 
-export default InfoList;
+export default MinorInfoList;

@@ -133,7 +133,7 @@
   gap: 20px;
 }
 
-.eduEntry {
+.displayEntry {
   width: 100%;
   padding: 20px 0px;
   background-color: white;
@@ -142,12 +142,16 @@
   text-align: start;
 }
 
-.eduEntry div {
+.displayEntry div {
   margin: 0px 30px;
 }
 
-.eduEntry {
+.displayEntry {
   font-weight: bold;
+}
+
+.displayEntry .levelDisplay {
+  font-weight: 300;
 }
 
 .addEntryButton {

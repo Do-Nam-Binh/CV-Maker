@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "../styles/ResumeForm.module.css";
 import Dropdown from "./Dropdown";
 import InfoList from "./InfoList";
-import MinorInfoInput from "./MinorInfoInput";
+import MinorInfoList from "./MinorInfoList";
 
 function ResumeForm({
   personalDetails,
@@ -20,8 +20,11 @@ function ResumeForm({
   projectInfo,
   projectList,
   skillInfo,
+  skillList,
   languageInfo,
+  languageList,
   hobbyInfo,
+  hobbyList,
   clearInfo,
 }) {
   const [openIndex, setOpenIndex] = useState(null); // State to track which section is open
@@ -210,7 +213,19 @@ function ResumeForm({
         isOpen={openIndex === 3}
         toggle={() => handleToggle(3)}
       >
-        <p>Content for Skills</p>
+        <MinorInfoList
+          list={skillList}
+          infoType="skills"
+          infoData={skillInfo}
+          editingId={editingId}
+          displayForm={displayForm}
+          handleInfoChange={handleInfoChange}
+          handleAddOrEdit={handleAddOrEdit}
+          handleEditSubmit={handleEditSubmit}
+          setDisplayForm={setDisplayForm}
+          setEditingId={setEditingId}
+          clearInfo={clearInfo}
+        />
       </Dropdown>
 
       <Dropdown
@@ -218,7 +233,19 @@ function ResumeForm({
         isOpen={openIndex === 4}
         toggle={() => handleToggle(4)}
       >
-        <p>Content for Languages</p>
+        <MinorInfoList
+          list={languageList}
+          infoType="languages"
+          infoData={languageInfo}
+          editingId={editingId}
+          displayForm={displayForm}
+          handleInfoChange={handleInfoChange}
+          handleAddOrEdit={handleAddOrEdit}
+          handleEditSubmit={handleEditSubmit}
+          setDisplayForm={setDisplayForm}
+          setEditingId={setEditingId}
+          clearInfo={clearInfo}
+        />
       </Dropdown>
 
       <Dropdown
@@ -246,12 +273,18 @@ function ResumeForm({
         isOpen={openIndex === 6}
         toggle={() => handleToggle(6)}
       >
-        <MinorInfoInput
+        <MinorInfoList
+          list={hobbyList}
           infoType="hobbies"
           infoData={hobbyInfo}
+          editingId={editingId}
+          displayForm={displayForm}
           handleInfoChange={handleInfoChange}
           handleAddOrEdit={handleAddOrEdit}
-          displayForm={displayForm}
+          handleEditSubmit={handleEditSubmit}
+          setDisplayForm={setDisplayForm}
+          setEditingId={setEditingId}
+          clearInfo={clearInfo}
         />
       </Dropdown>
     </div>

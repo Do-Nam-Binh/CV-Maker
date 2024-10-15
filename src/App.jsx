@@ -27,6 +27,7 @@ function App() {
     return savedEduInfo
       ? JSON.parse(savedEduInfo)
       : {
+          id: null,
           eduName: "",
           school: "",
           city: "",
@@ -49,6 +50,7 @@ function App() {
     return savedEmployInfo
       ? JSON.parse(savedEmployInfo)
       : {
+          id: null,
           position: "",
           employer: "",
           city: "",
@@ -71,6 +73,7 @@ function App() {
     return savedProjectInfo
       ? JSON.parse(savedProjectInfo)
       : {
+          id: null,
           title: "",
           summary: "",
           startMonth: "",
@@ -87,13 +90,41 @@ function App() {
   });
 
   //Storing skills, languages & hobby information
-  const [skillInfo, setSkillInfo] = useState({ name: "", level: 0 });
-  const [languageInfo, setLanguageInfo] = useState({ name: "", level: 0 });
-  const [hobbyInfo, setHobbyInfo] = useState({ name: "" });
+  const [skillInfo, setSkillInfo] = useState(() => {
+    const savedSkillInfo = localStorage.getItem("skillInfo");
+    return savedSkillInfo
+      ? JSON.parse(savedSkillInfo)
+      : { id: null, name: "", level: 0 };
+  });
 
-  const [skillList, setSkillList] = useState([]);
-  const [languageList, setLanguageList] = useState([]);
-  const [hobbyList, setHobbyList] = useState([]);
+  const [languageInfo, setLanguageInfo] = useState(() => {
+    const savedLanguageInfo = localStorage.getItem("languageInfo");
+    return savedLanguageInfo
+      ? JSON.parse(savedLanguageInfo)
+      : {
+          id: null,
+          name: "",
+          level: 0,
+        };
+  });
+
+  const [hobbyInfo, setHobbyInfo] = useState(() => {
+    const savedHobbyInfo = localStorage.getItem("hobbyInfo");
+    return savedHobbyInfo ? JSON.parse(savedHobbyInfo) : { id: null, name: "" };
+  });
+
+  const [skillList, setSkillList] = useState(() => {
+    const savedSkillList = localStorage.getItem("skillList");
+    return savedSkillList ? JSON.parse(savedSkillList) : [];
+  });
+  const [languageList, setLanguageList] = useState(() => {
+    const savedLanguageList = localStorage.getItem("languageList");
+    return savedLanguageList ? JSON.parse(savedLanguageList) : [];
+  });
+  const [hobbyList, setHobbyList] = useState(() => {
+    const savedHobbyList = localStorage.getItem("hobbyList");
+    return savedHobbyList ? JSON.parse(savedHobbyList) : [];
+  });
 
   const [image, setImage] = useState(
     localStorage.profileImg ? localStorage.profileImg : null
@@ -135,6 +166,31 @@ function App() {
   useEffect(() => {
     localStorage.setItem("projectList", JSON.stringify(projectList));
   }, [projectList]);
+
+  //Storing skills, languages, hobbies in local storage
+  useEffect(() => {
+    localStorage.setItem("skillInfo", JSON.stringify(skillInfo));
+  }, [skillInfo]);
+
+  useEffect(() => {
+    localStorage.setItem("skillList", JSON.stringify(skillList));
+  }, [skillList]);
+
+  useEffect(() => {
+    localStorage.setItem("languageInfo", JSON.stringify(languageInfo));
+  }, [languageInfo]);
+
+  useEffect(() => {
+    localStorage.setItem("languageList", JSON.stringify(languageList));
+  }, [languageList]);
+
+  useEffect(() => {
+    localStorage.setItem("hobbyInfo", JSON.stringify(hobbyInfo));
+  }, [hobbyInfo]);
+
+  useEffect(() => {
+    localStorage.setItem("hobbyList", JSON.stringify(hobbyList));
+  }, [hobbyList]);
 
   function handleInfoChange(e, type) {
     const { name, value } = e.target;
@@ -204,6 +260,23 @@ function App() {
           desc: "",
         });
         break;
+      case "skills":
+        setSkillInfo({
+          name: "",
+          level: 0,
+        });
+        break;
+      case "languages":
+        setLanguageInfo({
+          name: "",
+          level: 0,
+        });
+        break;
+      case "hobbies":
+        setHobbyInfo({
+          name: "",
+        });
+        break;
     }
   };
 
@@ -235,27 +308,20 @@ function App() {
   };
 
   const handleEdit = (id, type) => {
-    switch (type) {
-      case "education":
-        const eduToEdit = educationList.find((item) => item.id === id);
-        if (eduToEdit) setEducationInfo(eduToEdit);
+    const infoMap = {
+      education: [educationList, setEducationInfo],
+      employment: [employmentList, setEmploymentInfo],
+      projects: [projectList, setProjectInfo],
+      skills: [skillList, setSkillInfo],
+      languages: [languageList, setLanguageInfo],
+      hobbies: [hobbyList, setHobbyInfo],
+    };
 
-        break;
+    const [list, setFunction] = infoMap[type] || [];
 
-      case "employment":
-        const employToEdit = employmentList.find((item) => item.id === id);
-        if (employToEdit) setEmploymentInfo(employToEdit);
-        break;
+    const itemToEdit = list.find((item) => item.id === id);
+    if (itemToEdit) setFunction(itemToEdit);
 
-      case "projects":
-        const projectToEdit = projectList.find((item) => item.id === id);
-        if (projectToEdit) setProjectInfo(projectToEdit);
-        break;
-
-      default:
-        console.warn("Invalid type passed to handleEdit");
-        break;
-    }
     setEditingId(id); // Track the entry being edited
   };
 
@@ -277,8 +343,11 @@ function App() {
         projectInfo={projectInfo}
         projectList={projectList}
         skillInfo={skillInfo}
+        skillList={skillList}
         languageInfo={languageInfo}
+        languageList={languageList}
         hobbyInfo={hobbyInfo}
+        hobbyList={hobbyList}
         clearInfo={clearInfo}
       />
       <ResumePreview
@@ -287,6 +356,9 @@ function App() {
         educationList={educationList}
         employmentList={employmentList}
         projectList={projectList}
+        skillList={skillList}
+        languageList={languageList}
+        hobbyList={hobbyList}
       />
     </>
   );
